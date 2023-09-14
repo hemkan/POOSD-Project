@@ -19,28 +19,43 @@
                     header.classList.remove("scroll");
                 }
             });
+            
           </script>
     </head>
     <body>
         <header>
             <img class="logo" src="logo.png" alt="logo">
             <nav>
-                <input type="checkbox" id="check">
-                <label for="check" class="checkbutton">
-                    <i class="fa fa-bars"></i>
-                </label>
-                <ul class="nav_links">
+                <ul class="nav_links" id="nav">
                     <li>
                         <a href="#">Create</a>
                         <a href="#">View All</a>
-                        <!-- <a href="#">About</a> -->
-                        <input type="Search">
+                        <!-- <input type="Search"> -->
+                        <a href="cta" href="#"><button>Login</button></a>
+
+                        <a href="#" class="menu" id="menu" onclick="toggleMenu()">
+                            <i class="fa fa-bars"></i>
+                        </a>
                     </li>
+                    
                 </ul>
+                
             </nav>
-            <a href="cta" href="#"><button>Login</button></a>
+            
         </header>
         <!-- <img class="img" src="logo.png" alt="logo"> -->
-        
+        <script>
+            function toggleMenu() {
+                var x = document.querySelector(".nav_links li");
+                x.classList.toggle("responsive");
+                // if (x.className === "nav_links") {
+                //     // x.className += " responsive";
+                    
+                // } else {
+                //     x.className = "nav_links";
+                // }
+            }
+
+        </script>
     </body>
 </html>

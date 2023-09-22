@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <title>slp-7 Login / Register</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+        <style>
+            /* need css styles*/
+            body {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: normal;
+
+                text-align: center;
+            }
+            .register-text {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 100;
+                font-size: 12px;
+                text-align: center;
+                color: rgb(120, 114, 114);
+                margin-bottom: -3px;
+            }
+            .passwords-mismatch {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 100;
+                font-size: 12px;
+                margin-top: -2px;
+                text-align: center;
+                color: rgb(120, 114, 114);
+                display: none;
+            }
+
+            .red-squiggle {
+                text-decoration-color: red;
+                text-decoration: underline;
+                
+            }
+
+            .login-box {
+                width: 40%;              
+                padding: 10px;
+                border:1px #000;
+                border-radius: 5px;
+                background-color: #ff9900;
+                
+            }
+
+            input[type="text"], 
+            input[type="password"] {
+                width: 70%; /* Set text box width to 100% */
+                max-width: 300px;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 2px solid #f3f7fe;
+                border-radius: 5px;
+            }
+
+            button {
+                font-family: 'Monterrat', sans-serif;
+                background-color: #f3f7fe;
+                color: #3b82f6;
+                border: none;
+                border-radius: 8px;
+                width: 80%;
+                max-width: 320px;
+                height: 45px;
+                transition: .3s;
+                margin-top: 10px;
+            }
+
+            button:hover {
+                background-color: #3b82f6;
+                box-shadow: 0 0 0 5px #3b83f65f;
+                color: #fff;
+            }
+
+
+            .hidden {
+                display: none;
+            }
+
+            .error {
+                color: red;
+            }
+
+            @media screen and (max-width: 768px) {
+                /* Adjust styles for smaller screens here */
+                .login-box {
+                    width: 90%;
+                    max-width: none;
+                }
+    
+}
+        </style>
+    </head>
+    <body>
+        <div class="Login-form">
+            <h1>Login</h1>
+            <form id = "login-form" autocomplete="off">
+                <input type="text" id="username" placeholder="Username" required autocomplete="off"><br>
+                <input type="password" id="password" placeholder="Password" required autocomplete="new-password"><br>
+                <button type = "submit" id="login-button">Login</button>
+                <p id="register-account-text" class = "register-text">Need a new account?</p>
+
+            </form>
+            <button id="register-button">Register</button>
+            <div id="confirm-password" class="hidden">
+                <input type="password" id="confirm-password-input" placeholder="Confirm Password" required><br>
+                <span id="password-mismatch" class="passwords-mismatch">Passwords don't match.</span><br>
+                <button id="signup-button" type="button">Sign Up</button>
+                
+            </div>
+        </div>
+        <script src="/js/registrationHandler.js" async></script>
+        <script src="/js/Login_Register.js" async></script>
+    </body>
+</html>

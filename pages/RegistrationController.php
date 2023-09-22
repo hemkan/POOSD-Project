@@ -53,9 +53,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // Example:
 $controller = new RegistrationController($pdo);
-$postData = ['username' => 'jonj4040', 'password' => 'examplePassword'];
+$postData = ['username' => 'test1', 'password' => 'examplePassword1'];
 $result = $controller->registerUser($postData);
 
 // Output 
 echo json_encode($result);
-?>
+?> 

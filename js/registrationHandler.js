@@ -1,8 +1,16 @@
 function registerUser(username, password) {
+    console.log('made it to registrationHandler');
+    // Retrieve the username and password values from the form
+    let usernameValue = document.getElementById('username').value;
+    let passwordValue = document.getElementById('password').value;
+
     let registrationData = {
         username: username,
         password: password
     };
+    //some test
+    // Debugging: Log the registrationData object to the console
+    console.log('Registration Data:', registrationData);
 
     // Define the URL for your PHP script
     let url = '/pages/RegistrationController.php';

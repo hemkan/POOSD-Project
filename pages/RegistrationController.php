@@ -39,23 +39,27 @@ class RegistrationController
         }
     }
 }
-        /*
-        // Simulate saving user data (you should save it to a database in a real application)
-        $userData = [
-            'username' => $postData['username'],
-            'hashed_password' => $hashedPassword
-        ];
-        */
-// Create PDO instance
+
+// create PDO instance
 
 $pdo = new PDO('mysql:host=localhost;dbname=SLP-7_DB', 'webuser', '25WindmillCat71323');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Example:
-$controller = new RegistrationController($pdo);
-$postData = ['username' => 'test1', 'password' => 'examplePassword1'];
-$result = $controller->registerUser($postData);
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the raw JSON data from the request body
+    $json_data = file_get_contents('php://input');
+    
+    // Parse the JSON data into a PHP array
+    $postData = json_decode($json_data, true);
 
-// Output 
-echo json_encode($result);
+    // Create an instance of RegistrationController
+    $controller = new RegistrationController($pdo);
+
+    // Call the registerUser method with user input
+    $result = $controller->registerUser($postData);
+
+    // Output the result as JSON
+    echo json_encode($result);
+}
 ?> 

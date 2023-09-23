@@ -10,8 +10,6 @@ const registerAccountText = document.getElementById('register-account-text');
 const confirmPassword = document.getElementById('confirm-password');
 const passwordMismatch = document.getElementById('password-mismatch');
 
-//password.value = '';
-//confirmPasswordInput.value = '';
 
 function updateRedSquiggle() {
     
@@ -55,12 +53,11 @@ signupButton.addEventListener('click', () => {
         alert('Passwords do not match. Please try again');
         return;
     } else {
-
+        
         // get username and password from form
         let username = document.getElementById('username');
         let passwordValue = password.value;
-
-        registerUser(username, passwordValue);
+        registerUser(username.value, passwordValue);
         // Add code to handle registration here
         alert('User registered successfully.');
         

@@ -53,17 +53,25 @@ class CreateContact
 $pdo = new PDO('mysql:host=localhost;dbname=SLP-7_DB', 'webuser', '25WindmillCat71323');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$controller = new CreateContact($pdo);
-//$now = date('Y-m-d H:i:s');
-$postData = [
-    'access_id' => '1',
-    'first_name' => 'jonj4040',
-    'last_name' => 'joslin',
-    'phone' => '3217281392',
-    'email' => 'jonj4040@gmail.com',
-    'addDate' => date('Y-m-d H:i:s')
-];
-$result = $controller->addContact($postData);
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the raw JSON data from the request body
+    $json_data = file_get_contents('php://input');
+    
+    // Parse the JSON data into a PHP array
+    $postData = json_decode($json_data, true);
 
-echo json_encode($result);
+    // Create a PDO instance
+    $pdo = new PDO('mysql:host=localhost;dbname=SLP-7_DB', 'webuser', '25WindmillCat71323');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Create an instance of CreateContact
+    $controller = new CreateContact($pdo);
+
+    // Call the addContact method with user input
+    $result = $controller->addContact($postData);
+
+    // Output the result as JSON
+    echo json_encode($result);
+}
 ?>

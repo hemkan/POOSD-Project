@@ -27,13 +27,15 @@
 
           }
           button {
-            border: none;
-            background-color: transparent;
+            border: none !important;
+            background-color: transparent !important;
+            color: #2a2e34 !important;
           }
 
           button:hover {
             transform: scale(1.1);            
           }
+          
           
       </style>
     </head>
@@ -57,8 +59,14 @@
                 <td>123456789</td>
                 <td>markotto@gmail.com</td>
                 <td>3 minutes ago</td>
-                <td><button class><i class="fa-solid fa-pencil"></i></button>
-                <button class><i class="fa-solid fa-trash"></i></button></tr>
+                <td><div class="dropdown">
+                    <button class="btn btn-primary" type="button" data-toggle="dropdown" id="more"><i class="fa-solid fa-ellipsis"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="more">
+                        <a class="dropdown-item" href="edit.html">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                      </div>
+                  </div>
+                </td>
               </tr>
 
               <tr class="table-card">
@@ -66,8 +74,14 @@
                 <td>123456789</td>
                 <td>markotto@gmail.com</td>
                 <td>3 minutes ago</td>
-                <td><button class><i class="fa-solid fa-pencil"></i></button>
-                <button class><i class="fa-solid fa-trash"></i></button></tr>
+                <td><div class="dropdown">
+                    <button class="btn btn-primary" type="button" data-toggle="dropdown" id="more"><i class="fa-solid fa-ellipsis"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="more">
+                        <a class="dropdown-item" href="edit.html">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                      </div>
+                  </div>
+                </td>
               </tr>
 
               <tr class="table-card">
@@ -75,8 +89,14 @@
                 <td>123456789</td>
                 <td>markotto@gmail.com</td>
                 <td>3 minutes ago</td>
-                <td><button class><i class="fa-solid fa-pencil"></i></button>
-                <button class><i class="fa-solid fa-trash"></i></button></tr>
+                <td><div class="dropdown">
+                    <button class="btn btn-primary" type="button" data-toggle="dropdown" id="more"><i class="fa-solid fa-ellipsis"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="more">
+                        <a class="dropdown-item" href="edit.html">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                      </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

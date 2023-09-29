@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        
-    </head>
-    <body>
-        <!-- <div w3-include-html="navbar.html"></div> -->
+        <meta name ="viewport",content="width=device-width,initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login Page</title>
+        <style>
+            body{
+                padding:100px 50px;
+                background:rgb(255, 255, 255);
+                 color:rgb(35, 19, 80);
+            }
+            h1
+            {
+                color:#000000;
+                
+            }
+            .fromdesign
+            {
+                font-size:20px;
+                background-color: #7e8d29;
+            }
+            .formdesign input{
+                border:1px solid lightgreen;
+                background-color:lavender;
+                border-radius:4px;
+                font-size:15px;margin:14px;
+            }
+            .fromerror{
+                color:red;
+            }
+            .but
+            {
+                border-radius: 9px;
+                width: 90px;
+                height: 50px;
+                font-size: 25px;
+                margin: 22px 20px;
+                background: #226899;
+            }
 
-    </body>
+        </style>
+
+</head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<center>
+  <div class="full-screen-container">
+    <div class="login-container">
+      <h1 class="login-title">Login</h1>
+      <form class="form">
+        <div class="input-group success">
+          <label for="email">Username:</label>
+          <input type="email" name="email" id="email">
+        </div>
+
+        <div class="input-group error">
+          <label for="password">Password :</label>
+          <input type="password" name="password" id="password">
+        </div>
+        <button type="submit" class="login-button">Login</button>
+      </form>
+    </div>
+  </div>
+  </center>
+</body>
 </html>

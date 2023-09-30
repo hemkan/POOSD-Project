@@ -2,73 +2,110 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <meta name ="viewport",content="width=device-width,initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Login Page</title>
+        <title>Login</title>
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
-            body{
-                padding:100px 50px;
-                background:rgb(255, 255, 255);
-                 color:rgb(35, 19, 80);
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
             }
-            h1
-            {
-                color:#000000;
+            .card {
+                position: relative;
+                padding: 1rem;
+                /* margin: 1rem -15px 0; */
+                border: solid #f8f9fa;
+                /* border-width: 0.2rem 0 0;             */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* align-items: center;     */
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                text-align: left;
                 
             }
-            .fromdesign
-            {
-                font-size:20px;
-                background-color: #7e8d29;
+            button {
+                text-transform: uppercase;
+                letter-spacing: 2.5px;
+                border: none;
+                border-radius: 20px;
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+                background-color: #fff;
+                padding: 1vh 6vh;
+                margin: 10px;
+                background-color: rgba(199, 41, 97, 1);
+                color: white;
             }
-            .formdesign input{
-                border:1px solid lightgreen;
-                background-color:lavender;
-                border-radius:4px;
-                font-size:15px;margin:14px;
+            button:hover {
+                
+                color: white;
+                transform: scale(1.01);
             }
-            .fromerror{
-                color:red;
-            }
-            .but
-            {
-                border-radius: 9px;
-                width: 90px;
-                height: 50px;
-                font-size: 25px;
-                margin: 22px 20px;
-                background: #226899;
-            }
+            h1 {
+                text-transform: uppercase;
+                font-size: 3.4vh;
+                padding-top: 2vh;
+                padding-bottom: 2vh;
+                text-align: center;
 
+            }
+            small {
+                padding: 10px 10px;
+                padding-top: 2px;
+            }
+            #wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                /* margin: -48px 0px 0px !important; */
+
+                /* margin: 0; */
+
+            }
+            #wrapper.container.mt-5 {
+                margin: 0px 0px 0px !important;
+                /* TODO: center horizontally or remove ^, causing margin space at top */
+                
+
+            }
         </style>
-
 </head>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
-<center>
-  <div class="full-screen-container">
-    <div class="login-container">
-      <h1 class="login-title">Login</h1>
-      <form class="form">
-        <div class="input-group success">
-          <label for="email">Username:</label>
-          <input type="email" name="email" id="email">
-        </div>
+    <div class="container mt-5" id="wrapper">
+    <!-- <div class="container mt-5 col row justify-content-center" id="wrapper"> -->
+        <form class="card " style="width: 60vh;">
+            <h1>Login</h1>
+            <div class="form-group">
+                <label for="email_inp">Email</label>
+                <input type="email" class="form-control" id="email_inp" placeholder="abc@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="passwrd_inp">Password</label>
+                <input type="password" class="form-control" id="passwrd_inp" placeholder="Password">
+            </div>
+            <button type="submit">Login</button>
+            <small id="signUp" class="form-text text-muted">Need an account? <a href="#">Sign Up</a></small>
 
-        <div class="input-group error">
-          <label for="password">Password :</label>
-          <input type="password" name="password" id="password">
-        </div>
-        <button type="submit" class="login-button">Login</button>
-      </form>
+        </form>
     </div>
-  </div>
-  </center>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>

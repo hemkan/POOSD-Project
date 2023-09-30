@@ -1,6 +1,5 @@
 <?php
 require_once 'PerformLogin.php';
-
 require_once '../config/database.php'; // Adjust the path as needed
 
 class LoginController
@@ -14,13 +13,15 @@ class LoginController
 
     public function loginUser($postData)
     {
-        if (empty($postData['username']) || empty($postData['password'])) {
+        if (empty($postData['username']) || empty($postData['password'])) 
+        {
             return ['error' => 'Username and password are required'];
         }
 
         $user = $this->retrieveUser($postData['username']);
 
-        if (!$user || !password_verify($postData['password'], $user['password'])) {
+        if (!$user || !password_verify($postData['password'], $user['password'])) 
+        {
             throw new Exception('Invalid username or password.');
         }
 
@@ -39,7 +40,8 @@ class LoginController
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             return $user;
-        } catch (PDOException $e) {
+        } catch (PDOException $e) 
+        {
             throw new Exception('Database query error: ' . $e->getMessage());
         }
     }
@@ -47,9 +49,11 @@ class LoginController
 
 try {
     $pdo = createPDO();
+
     $loginController = new LoginController($pdo);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+    {
         // Assuming you have POST data for username and password
         $postData = [
             'username' => $_POST['username'],
@@ -58,13 +62,16 @@ try {
 
         $result = $loginController->loginUser($postData);
 
-        if (isset($result['error'])) {
+        if (isset($result['error'])) 
+        {
             echo $result['error'];
-        } elseif (isset($result['success'])) {
+        } elseif (isset($result['success'])) 
+        {
             echo $result['success'];
         }
     }
-} catch (PDOException $e) {
+} catch (PDOException $e) 
+{
     echo 'Login error: ' . $e->getMessage();
 }
 ?>

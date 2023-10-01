@@ -8,39 +8,155 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
         <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script>
-            // event listener that basically adds a shadow whenever scrolled down
-            window.addEventListener('scroll', function() {
-                var header = document.querySelector('header');
-                if (window.pageYOffset > 0) {
-                    header.classList.add("scroll");
-                } else {
-                    header.classList.remove("scroll");
-                }
-            });
-          </script>
+        <script src="https://kit.fontawesome.com/5d8ee741cc.js" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+              #right_side {
+                list-style: none;
+                /* padding-bottom: 0px; */
+                padding: 0px 0px 0px 0px;
+                margin: 0px 0px 0px;
+              }
+
+          /* when  shrunk*/
+            @media screen and (max-width: 600px) {
+              #right_side {
+                display: none;
+              }
+              #notLoggedIn_dd {
+                display: block;
+              }
+          }
+          /* when not shrunk */
+          @media screen and (min-width: 601px) {
+            #right_side {
+                display: block;
+              }
+
+              #notLoggedIn_dd {
+                display: none;
+              }
+          }
+
+            /* Align the bars to the right */
+            .navbar-toggler {
+                float: right !important;
+            }
+            .nav-link {
+              color: black;
+            }
+
+        </style>
     </head>
     <body>
         <header>
-            <img class="logo" src="logo.png" alt="logo">
-            <nav>
-                <!-- <input type="checkbox" id="check">
-                <label for="check" class="checkbutton">
-                    <i class="fa fa-bars"></i>
-                </label> -->
-                <ul class="nav_links">
-                    <li>
-                        <a href="#">Create</a>
-                        <a href="#">View All</a>
-                        <!-- <a href="#">About</a> -->
-                        <input type="Search">
+             <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="#">
+                    <img src="logo.png" width="50" height="50" alt="">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_items" aria-controls="navbar_items" aria-expanded="false" aria-label="Toggle navigation">
+
+                  <i class="fa-solid fa-bars"></i>
+                </button>
+
+              
+                <div class="collapse navbar-collapse" id="navbar_items" display="none">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Home</a>
                     </li>
-                </ul>
-            </nav>
-            <a href="cta" href="#"><button>Login</button></a>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Contacts</a>
+                    </li>
+                    <li class="nav-item" id="notLoggedIn_dd" display="none">
+                      <a class="nav-link" href="#" >Login</a>
+                    </li>
+                    <li class="nav-item" id="loggedIn_dropdwn">
+                      <a class="nav-link" href="#"  display="none">My Profile</a>
+                    </li>
+                  <!-- <li class="nav-item" id="loggedIn">
+                        <img src="profileimg.jpg" width="75" height="75" alt="">
+                    </li> -->
+                  </ul>
+                  <ul id="right_side">
+                    <li class="nav-item ml-auto" id="notLoggedIn">
+                        <a class="nav-link" href="#" >Login</a>
+                    </li>
+                    <!-- <li class="nav-item ml-auto" id="loggedIn">
+                      <a class="nav-link" href="#" >My Profile</a>
+                  </li> -->
+                    <li class="nav-item ml-auto" id="loggedIn">
+                        <img src="profileimg.jpg" width="50" height="50" alt="">
+                    </li>
+                  </ul>
+                </div>
+
+              </nav>
+
+
         </header>
-        <!-- <img class="img" src="logo.png" alt="logo"> -->
         
+            
+
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            function visibility() {
+
+              // Simulate a user being logged in (you should replace this with your actual authentication logic)
+              const isLoggedIn = false; // Change this to true if the user is logged in
+
+              const screenWidth = window.innerWidth;
+              // Select menu items to toggle
+              const notLoggedIn_dd = document.getElementById("notLoggedIn_dd");
+              const loggedIn_dd = document.getElementById("loggedIn_dropdwn");
+              const notLoggedIn = document.getElementById("notLoggedIn");
+              const loggedIn = document.getElementById("loggedIn");
+
+
+              notLoggedIn_dd.style.display = "none";
+              loggedIn_dd.style.display = "none";
+              notLoggedIn.style.display = "none";
+              loggedIn.style.display = "none";
+              // Toggle visibility based on login status
+              if (isLoggedIn) {
+                if (screenWidth > 600)
+                {
+                  loggedIn.style.display = "block";
+                }
+                else {
+                  loggedIn_dd.style.display = "block";
+                }
+                // notLoggedIn_dd.style.display = "none";
+                // loggedIn_dd.style.display = "block";
+              } else {
+                if (screenWidth > 600)
+                {
+                  notLoggedIn.style.display = "block";
+                }
+                else {
+                  notLoggedIn_dd.style.display = "block";
+                }
+                // notLoggedIn_dd.style.display = "block";
+                // loggedIn_dd.style.display = "none";
+              }
+            }
+
+
+            function onLoginStatusChange(isLoggedIn) {
+      // Update the visibility when the login status changes
+              visibility();
+            }
+            visibility();
+            onLoginStatusChange(false);
+
+            window.addEventListener("resize", visibility);
+      </script>
+
+
     </body>
 </html>

@@ -1,3 +1,4 @@
+<!-- TODO: import this into all -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,7 +53,7 @@
     <body>
         <header>
              <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="index.html">
                     <img src="logo.png" width="50" height="50" alt="">
                 </a>
 
@@ -65,16 +66,16 @@
                 <div class="collapse navbar-collapse" id="navbar_items" display="none">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Home</a>
+                      <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Contacts</a>
+                      <a class="nav-link" href="contacts.html">Contacts</a>
                     </li>
                     <li class="nav-item" id="notLoggedIn_dd" display="none">
-                      <a class="nav-link" href="#" >Login</a>
+                      <a class="nav-link" href="login.html" >Login</a>
                     </li>
                     <li class="nav-item" id="loggedIn_dropdwn">
-                      <a class="nav-link" href="#"  display="none">My Profile</a>
+                      <a class="nav-link" href="myprofile.html"  display="none">My Profile</a>
                     </li>
                   <!-- <li class="nav-item" id="loggedIn">
                         <img src="profileimg.jpg" width="75" height="75" alt="">
@@ -82,13 +83,15 @@
                   </ul>
                   <ul id="right_side">
                     <li class="nav-item ml-auto" id="notLoggedIn">
-                        <a class="nav-link" href="#" >Login</a>
+                        <a class="nav-link" href="login.html" >Login</a>
                     </li>
                     <!-- <li class="nav-item ml-auto" id="loggedIn">
                       <a class="nav-link" href="#" >My Profile</a>
                   </li> -->
                     <li class="nav-item ml-auto" id="loggedIn">
-                        <img src="profileimg.jpg" width="50" height="50" alt="">
+                        <a class="nav-link" href="myprofile.html" >
+                            <img src="profileimg.jpg" width="50" height="50" alt="">
+                        </a>
                     </li>
                   </ul>
                 </div>

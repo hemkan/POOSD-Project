@@ -22,7 +22,7 @@
             .container {
                 margin: 0px 0px !important;
             }
-            .overlay {
+            .loginOverlay, .signupOverlay {
                 display: none;
                 position: fixed;
                 top: 0;
@@ -78,9 +78,12 @@
                 padding: 10px 10px;
                 padding-top: 2px;
             }
-            #invalidLogin {
+            #invalidLogin, #invalidSignup {
                 color: red;
             }
+            /* #invalidSignup {
+                color: red;
+            } */
         </style>
     </head>
     <body>
@@ -94,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="overlay">
+        <div class="loginOverlay">
             <center>
                 <div class="container mt-5">
                     <form class="card" style="width: 60vh;">
@@ -109,7 +112,41 @@
                         </div>
                         <small id="invalidLogin" style="display: none;">Invalid login credentials. Please try again.</small>
                         <button type="submit" id="loginBtn">Login</button>
-                        <small id="footerTxt" class="form-text text-muted">Need an account? <a href="#">Sign Up</a></small>
+                        <small id="footerTxt" class="form-text text-muted">Need an account? <a href="#" id="signup_small">Sign Up</a></small>
+                    </form>
+                </div>
+            </center>
+        </div>
+        <div class="signupOverlay">
+            <center>
+                <div class="container mt-5">
+                    <form class="card" style="width: 60vh;">
+                        <h1 id="heading">Sign Up</h1>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="first">First Name</label>
+                                <input type="text" class="form-control" id="first" placeholder="First">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="last">Last Name</label>
+                                <input type="text" class="form-control" id="last" placeholder="Last">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="phone_inp">Phone</label>
+                            <input type="tel" class="form-control" id="phone_inp" placeholder="(123)-457-789">
+                        </div>
+                        <div class="form-group">
+                            <label for="email_inpS">Email</label>
+                            <input type="email" class="form-control" id="email_inpS" placeholder="abc@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwrd_inpS">Password</label>
+                            <input type="password" class="form-control" id="passwrd_inpS" placeholder="Password">
+                        </div>
+                        <small id="invalidSignup" style="display: none;">Signup failed. Please try again.</small>
+                        <button type="submit" id="signupBtn">Sign Up</button>
+                        <small id="signUp" class="form-text text-muted">Have an account? <a href="#" id="login_small">Login</a></small>
                     </form>
                 </div>
             </center>
@@ -120,7 +157,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
             const login = document.getElementById('login');
-            const overlay = document.querySelector('.overlay');
+            const overlayL = document.querySelector('.loginOverlay');
+            const signup = document.getElementById('signup');
+            const overlayS = document.querySelector('.signupOverlay');
+            
             login.addEventListener('click', () => {
                 // document.getElementById('first').value = '';
                 // document.getElementById('last').value = '';
@@ -128,12 +168,15 @@
                 // document.getElementById('email_inp').value = '';
                 // const head = document.getElementById('heading');
                 // head.textContent = 'Login';
-
+                showOverlay(overlayL);
+                hideOverlay(overlayS);
                 // Show the overlay and modal
-                overlay.style.display = 'flex';
+                // overlay.style.display = 'flex';
             });
             const loginBtn = document.getElementById('loginBtn');
             loginBtn.addEventListener('click', () => {
+                document.getElementById('email_inp').value = '';
+                document.getElementById('password_inp').value = '';
                 // check if valid inputs
                 // authenticate
                 let valid = false;
@@ -144,6 +187,65 @@
                     document.getElementById('invalidLogin').style.display = 'block';
                 }
             }); 
+            
+            signup.addEventListener('click', () => {
+                // document.getElementById('first').value = '';
+                // document.getElementById('last').value = '';
+                // document.getElementById('phone_inp').value = '';
+                // document.getElementById('email_inp').value = '';
+                // const head = document.getElementById('heading');
+                // head.textContent = 'Login';
+                showOverlay(overlayS);
+                hideOverlay(overlayL);
+                // Show the overlay and modal
+                // overlayS.style.display = 'flex';
+            });
+            const signupBtn = document.getElementById('signupBtn');
+            signupBtn.addEventListener('click', () => {
+                document.getElementById('email_inpS').value = '';
+                document.getElementById('password_inpS').value = '';
+                document.getElementById('phone_inp').value = '';
+                document.getElementById('first').value = '';
+                document.getElementById('last').value = '';
+                // check if valid inputs
+                // authenticate
+                let valid = false;
+                if (valid) {
+                    window.location.href = 'crud.html';
+                }
+                else {
+                    document.getElementById('invalidSignup').style.display = 'block';
+                }
+            }); 
+            
+            const login_small = document.getElementById('login_small');
+            login_small.addEventListener('click', () => {
+                document.getElementById('email_inp').value = '';
+                document.getElementById('password_inp').value = '';
+                showOverlay(overlayL);
+                hideOverlay(overlayS);
+            });
+            
+            const signup_small = document.getElementById('signup_small');
+            signup_small.addEventListener('click', () => {
+                document.getElementById('email_inpS').value = '';
+                document.getElementById('password_inpS').value = '';
+                document.getElementById('phone_inp').value = '';
+                document.getElementById('first').value = '';
+                document.getElementById('last').value = '';
+                showOverlay(overlayS);
+                hideOverlay(overlayL);
+                // Show the overlay and modal
+                // overlayS.style.display = 'flex';
+            });
+            
+
+            function showOverlay(overlay) {
+                overlay.style.display = 'flex';
+            }
+            function hideOverlay(overlay) {
+                overlay.style.display = 'none';
+            }
         </script>
     </body>
 </html>

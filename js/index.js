@@ -11,19 +11,31 @@ login.addEventListener('click', () => {
     hideOverlay(overlayS);
 });
 const loginBtn = document.getElementById('loginBtn');
-loginBtn.addEventListener('click', () => {
-    // TODO: check if all fields filled and if any invalid inputs
-    let valid = false;
-    if (true) {
+// helps check for basic email addresses
+loginBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById('email_inp').value;
+    const passwrdInput = document.getElementById('passwrd_inp').value;
+    // check if all fields filled and if any invalid inputs
+    let valid = isValidEmail_P(emailInput, passwrdInput);
+    if (valid) {
+        console.log('valid email and passwrd');
         // if (check if valid login credentials)
         const loginData = {
-            email: document.getElementById('email_inp').value,
-            password: document.getElementById('passwrd_inp').value
+            email: emailInput,
+            password: passwrdInput,
         };
         console.log('sending: ', loginData);
-        loginUser(loginData);
-
-        window.location.href = '../pages/crud.php';
+        // loginUser(loginData)
+        if (true)
+        {
+            document.getElementById('invalidLogin').textContent = 'Invalid login credentials. Please try again.';
+        }
+        else {
+            console.log('logged in');
+            window.location.href = '../pages/crud.php';
+        }
+        
     }
     else {
         document.getElementById('invalidLogin').style.display = 'block';
@@ -42,20 +54,26 @@ signup.addEventListener('click', () => {
 
 });
 const signupBtn = document.getElementById('signupBtn');
-signupBtn.addEventListener('click', () => {
+signupBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const firstName = document.getElementById('first').value;
+    const lastName = document.getElementById('last').value;
+    const phoneN = document.getElementById('phone_inp').value;
+    const emailInput = document.getElementById('email_inp').value;
+    const passwrdInput = document.getElementById('passwrd_inp').value;
     
     document.getElementById('invalidSignup').style.display = 'none';
     // check if valid inputs
     // authenticate
-    let valid = false;
-    if (true) {
+    let valid = isValid(firstName, lastName, phoneN, emailInput, passwrdInput);
+    if (valid) {
         const login = {
             // "contact_id" :
-            first_name: document.getElementById('first').value,
-            last_name: document.getElementById('last').value,
-            phone: document.getElementById('phone_inp').value,
-            email: document.getElementById('email_inpS').value,
-            password: document.getElementById('passwrd_inpS').value
+            first_name: firstName,
+            last_name: lastName,
+            phone: deFormatPhone(phoneN),
+            email: emailInput,
+            password: passwrdInput
             //"date": new Date(),
         };
 
@@ -113,3 +131,83 @@ function hideOverlay(overlay) {
 //     showOverlay(overlayS);
 // });
 // --------------------------------------------
+
+// -------------isValid------------------------
+function isValidEmail_P(email, password) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isPasswordValid = password.length >= 6;
+    const isEmailValid = emailRegex.test(email);
+    console.log(isPasswordValid, isEmailValid);
+    if (email === '' || password === '') {
+        document.getElementById('invalidLogin').textContent = 'Please enter your email and password.';
+        return false;
+    }
+    else if (!isEmailValid) {
+        document.getElementById('invalidLogin').textContent = 'Invalid email address. Please enter a valid email.';        
+        return false;
+    }
+    else if (!isEmailValid) {
+        document.getElementById('invalidLogin').textContent = 'Invalid password. Must be at least 6 characters long.';
+        return false;
+    }
+    return true;
+
+}
+function isValidInfo(first, last, phone) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isPasswordValid = password.length >= 6;
+    const isEmailValid = emailRegex.test(email);
+    // console.log(isPasswordValid, isEmailValid);
+
+    // check if empty
+    const isFirstNameValid = first.trim() !== '';
+    const isLastNameValid = last.trim() !== '';
+
+    const isPhoneValid = isPhoneValid(phone);
+    if (isFirstNameValid && isLastNameValid && isPhoneValid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isPhoneValid(phone) {
+    const numericPhone = deFormatPhone(phone);
+    const phoneRegex = /^\d{10}$/;
+    const isPhoneValid = phoneRegex.test(numericPhone);
+    if (isPhoneValid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function deFormatPhone(number) {
+    const numericPhone = number.replace(/\D/g, '');
+    return numericPhone;
+}
+function isValidEmail_P(first, last, email, passwrd, phone) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isPasswordValid = password.length >= 6;
+    const isEmailValid = emailRegex.test(email);
+    const isPhoneValid = isPhoneValid(phone);
+    console.log(isPasswordValid, isEmailValid, isPhoneValid);
+    if (first === '' && last ==='' && email === '' && passwrd === '' && phone === '') {
+        document.getElementById('invalidLogin').textContent = 'Please fill out all required fields.';
+        return false;
+    }
+    else if (!isEmailValid) {
+        document.getElementById('invalidLogin').textContent = 'Invalid email address. Please enter a valid email.';        
+        return false;
+    }
+    else if (!isEmailValid) {
+        document.getElementById('invalidLogin').textContent = 'Invalid password. Must be at least 6 characters long.';
+        return false;
+    }
+    return true;
+
+}
+
+function errormsg(email, passwrd) {
+}
+// ------------------------------------------

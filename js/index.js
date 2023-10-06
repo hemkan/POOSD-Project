@@ -65,8 +65,8 @@ signupBtn.addEventListener('click', (e) => {
     document.getElementById('invalidSignup').style.display = 'none';
     // check if valid inputs
     // authenticate
-    let valid = isValid(firstName, lastName, phoneN, emailInput, passwrdInput);
-    if (valid) {
+    // let valid = isValid(firstName, lastName, phoneN, emailInput, passwrdInput);
+    if (true) {
         const login = {
             // "contact_id" :
             first_name: firstName,
@@ -78,6 +78,7 @@ signupBtn.addEventListener('click', (e) => {
         };
 
         registerUser(login);
+        // if (registerUser(login))
         // ready to send to the backedn
         // store email and password 
         window.location.href = '../pages/crud.php';
@@ -171,6 +172,26 @@ function isValidInfo(first, last, phone) {
     }
 }
 
+
+function deFormatPhone(number) {
+    const numericPhone = number.replace(/\D/g, '');
+    return numericPhone;
+}
+// function isValid(first, last, email, passwrd, phone) {
+//     // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     // const isPasswordValid = password.length >= 6;
+//     // const isEmailValid = emailRegex.test(email);
+//     const isPhoneValidd = isPhoneValid(phone);
+//     console.log(isPhoneValidd);
+//     if (first === '' && last ==='' && email === '' && passwrd === '' && phone === '') {
+//         document.getElementById('invalidLogin').textContent = 'Please fill out all required fields.';
+//         return false;
+//     }
+//     else {
+//         return isValidEmail_P(email, passwrd) && true;
+//     }
+// }
+
 function isPhoneValid(phone) {
     const numericPhone = deFormatPhone(phone);
     const phoneRegex = /^\d{10}$/;
@@ -180,32 +201,6 @@ function isPhoneValid(phone) {
     } else {
         return false;
     }
-}
-
-function deFormatPhone(number) {
-    const numericPhone = number.replace(/\D/g, '');
-    return numericPhone;
-}
-function isValidEmail_P(first, last, email, passwrd, phone) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isPasswordValid = password.length >= 6;
-    const isEmailValid = emailRegex.test(email);
-    const isPhoneValid = isPhoneValid(phone);
-    console.log(isPasswordValid, isEmailValid, isPhoneValid);
-    if (first === '' && last ==='' && email === '' && passwrd === '' && phone === '') {
-        document.getElementById('invalidLogin').textContent = 'Please fill out all required fields.';
-        return false;
-    }
-    else if (!isEmailValid) {
-        document.getElementById('invalidLogin').textContent = 'Invalid email address. Please enter a valid email.';        
-        return false;
-    }
-    else if (!isEmailValid) {
-        document.getElementById('invalidLogin').textContent = 'Invalid password. Must be at least 6 characters long.';
-        return false;
-    }
-    return true;
-
 }
 
 function errormsg(email, passwrd) {

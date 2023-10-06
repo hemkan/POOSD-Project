@@ -107,7 +107,7 @@ if(!isset($_SESSION['user']))
                     <div class="overlay">
                         <nav class="navbar navbar-expand-lg">
                             <a class="" id="close"><i class="fa-solid fa-chevron-left"></i></a>
-                            <a href="index.html" id="loginC" class="btn ml-auto">Logout</a>
+                            <a href="../index.html" id="loginC" class="btn ml-auto">Logout</a>
                         </nav>
                         <div class="container mt-5">
                             <form class="container mt-5" style="width: 60vh;">

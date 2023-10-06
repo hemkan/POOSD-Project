@@ -1,6 +1,6 @@
 <?php
 // PerformLogIn.php
-class PerformLogIn
+class PerformLogin
 {
     public function __construct($user) 
     {
@@ -9,6 +9,8 @@ class PerformLogIn
             session_start();
         }
         $_SESSION['user'] = $user;
+        error_log('session_data: ' . print_R($user, true));
+        //header('Location: /pages/user_page.php');
     }
     
 }

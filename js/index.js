@@ -14,9 +14,16 @@ const loginBtn = document.getElementById('loginBtn');
 loginBtn.addEventListener('click', () => {
     // TODO: check if all fields filled and if any invalid inputs
     let valid = false;
-    if (valid) {
+    if (true) {
         // if (check if valid login credentials)
-        window.location.href = 'crud.html';
+        const loginData = {
+            email: document.getElementById('email_inp').value,
+            password: document.getElementById('passwrd_inp').value
+        };
+        console.log('sending: ', loginData);
+        loginUser(loginData);
+
+        window.location.href = '../pages/crud.php';
     }
     else {
         document.getElementById('invalidLogin').style.display = 'block';

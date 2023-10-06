@@ -2,6 +2,10 @@
 
     include 'functions.php';
 
+    session_start();
+    $_SESSION['user']['user_id'] = 1;
+    $user_id = $_SESSION['user']['user_id'];
+
     // 'GET' OR 'POST'
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
@@ -11,7 +15,7 @@
     
         $contact = new Contact();
         // $result = $contact->load_contact(2);
-        $result = $contact->search($post_data);
+        $result = $contact->search($user_id, $post_data);
 
         // ...goes back to the js
         

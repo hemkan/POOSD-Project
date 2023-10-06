@@ -21,13 +21,12 @@ function loadTable(result_obj)
     document.getElementById("table_body").innerHTML = new_table;
 }
 
-function loadAllContact(user_id)
+function loadAllContact()
 {
-        
-    let new_string = {id:user_id};
-    let send_json = JSON.stringify(new_string);
+    // let new_string = {id:user_id};
+    // let send_json = JSON.stringify(new_string);
     let process = new XMLHttpRequest();
-    process.open("POST", "api/a_read.php", true);
+    process.open("POST", "/small_project/POOSD-Project/api/a_read.php", true);
     process.setRequestHeader("Content-type", "application/json");
 
     process.onreadystatechange = function() 
@@ -40,22 +39,23 @@ function loadAllContact(user_id)
             populateTable(data);
         }
     };
-    process.send(send_json);
+    process.send();
 }
 
 function searchInput()
 {
     // modify this to store the current user id
-    let user_id = 1;
+    // let user_id = 1;
     let text = new String(document.getElementById("search-bar-input").value);
 
     // alert(text);
     if (text.length > 0)
     {
-        let new_string = {id:user_id, search_string:text};
+        // let new_string = {id:user_id, search_string:text};
+        let new_string = {search_string:text};
         let send_json = JSON.stringify(new_string);
         let process = new XMLHttpRequest();
-        process.open("POST", "api/a_search.php", true);
+        process.open("POST", "/small_project/POOSD-Project/api/a_search.php", true);
         process.setRequestHeader("Content-type", "application/json");
         
         process.onreadystatechange = function() 
@@ -72,7 +72,8 @@ function searchInput()
     }
     else
     {
-        loadAllContact(user_id);
+        // loadAllContact(user_id);
+        loadAllContact();
         
     }
 }
@@ -80,11 +81,11 @@ function searchInput()
 function deleteContact(contact_id)
 {
     // change this to the current user
-    let user_id = 1; 
+    // let user_id = 1; 
     let new_string = {id:contact_id};
     let send_json = JSON.stringify(new_string);
     let process = new XMLHttpRequest();
-    process.open("POST", "api/delete.php", true);
+    process.open("POST", "/small_project/POOSD-Project/api/delete.php", true);
     process.setRequestHeader("Content-type", "application/json");
 
     process.onreadystatechange = function() 
@@ -92,7 +93,8 @@ function deleteContact(contact_id)
         if (this.readyState == 4 && this.status == 200)
         {
             let obj = (process.responseText);
-            loadAllContact(user_id);
+            // loadAllContact(user_id);
+            loadAllContact();
         }
     };
     process.send(send_json);
@@ -101,8 +103,8 @@ function deleteContact(contact_id)
 function main()
 {
     // modify this to use the current user_id
-    let user_id = 1;
-    document.querySelector(".table").onload = loadAllContact(user_id);
+    // let user_id = 1;
+    document.querySelector(".table").onload = loadAllContact();
 }
 
 main();

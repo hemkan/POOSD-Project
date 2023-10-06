@@ -7,9 +7,11 @@
     {
         // const $connect = connect_db();
         private $connect;
+        // private $user_id;
 
         function _construct()
         {
+            // $this->user_id = $_SESSION["user"]["user_id"];
             $this->connect = connect_db();
             echo "connected";
         }
@@ -37,7 +39,7 @@
         function load_contact($access_id)
         {
             $connect = connect_db();
-            $sql = "SELECT * FROM Contact C WHERE C.access_id = '$access_id'";
+            $sql = "SELECT * FROM contacts_2 C WHERE C.access_id = '$access_id'";
             $sql_result = mysqli_query($connect, $sql);
 
             // $result = array();
@@ -63,7 +65,7 @@
         function delete_contact($contact_id)
         {
             $connect = connect_db();
-            $sql = "DELETE FROM Contact C WHERE C.contact_id = '$contact_id'";
+            $sql = "DELETE FROM contacts_2 C WHERE C.contact_id = '$contact_id'";
             $sql_result = mysqli_query($connect, $sql);
 
             // echo $sql_result;
@@ -77,16 +79,16 @@
             }
         }
 
-        function search($post_data)
+        function search($user_id, $post_data)
         {
             $connect = connect_db();
-            $access_id = $post_data['id'];
+            $access_id = $user_id;
             $text = $post_data['search_string'];
             // $access_id = 1;
             // $text = 'josh';
 
             // change the table and the variable name to remote db
-            $sql = "SELECT * FROM Contact C
+            $sql = "SELECT * FROM contacts_2 C
                                         -- WHERE LOCATE('$text', C.first_name) > 0
                                         WHERE (C.first_name LIKE '%$text%'
                                         OR C.last_name LIKE '%$text%')
@@ -101,6 +103,8 @@
     }
 
     // $test = new Contact();
+    // $result = $test->load_contact(1);
+    // print_r($result);
     // $result = $test->search();
     // echo $result[0]["first_name"];
     // echo json_encode($result);

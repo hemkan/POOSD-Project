@@ -1,16 +1,16 @@
 <?php
 // check for session
-// session_start();
-// if(!isset($_SESSION['user']))
-// {
-//     echo '<p>You are being redirected to log in...</p>';
-//     error_log('session not valid');
-//     header('Location: ../');
+session_start();
+if(!isset($_SESSION['user']))
+{
+    echo '<p>You are being redirected to log in...</p>';
+    error_log('session not valid');
+    header('Location: ../');
     
-//     exit;
-// }else{
-//     error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
-// }
+    exit;
+}else{
+    error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
+}
 
 ?>
 

@@ -3,7 +3,18 @@
     include 'functions.php';
 
     session_start();
-    $_SESSION['user']['user_id'] = 1;
+    if(!isset($_SESSION['user']))
+    {
+        // echo '<p>You are being redirected to log in...</p>';
+        // error_log('session not valid');
+        header('Location: ../index.html');
+        
+        exit;
+    }
+    else{
+        error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
+    }
+    // $_SESSION['user']['user_id'] = 1;
     $user_id = $_SESSION['user']['user_id'];
 
     // 'GET' OR 'POST'

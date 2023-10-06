@@ -3,7 +3,8 @@
     include 'functions.php';
 
     session_start();
-    $_SESSION['user']['user_id'] = 1;
+    // session_unset();
+    // $_SESSION['user']['user_id'] = 1;
     if(!isset($_SESSION['user']))
     {
         // echo '<p>You are being redirected to log in...</p>';

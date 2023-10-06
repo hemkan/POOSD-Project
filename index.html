@@ -78,6 +78,9 @@
                 padding: 10px 10px;
                 padding-top: 2px;
             }
+            #invalidLogin {
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -86,8 +89,8 @@
                 <div class="col-md-6 text-center">
                             <h1 class="card-title">Welcome!</h1>
                             <p class="card-text">Manage your contacts with ease.</p>
-                            <a href="#" class="btn btn-primary" id="login">Login</a>
-                            <a href="#" class="btn btn-secondary" id="signup">Sign Up</a>
+                            <button class="btn btn-primary" id="login">Login</button>
+                            <button class="btn btn-secondary" id="signup">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -104,7 +107,8 @@
                             <label for="passwrd_inp">Password</label>
                             <input type="password" class="form-control" id="passwrd_inp" placeholder="Password">
                         </div>
-                        <button type="submit">Login</button>
+                        <small id="invalidLogin" style="display: none;">Invalid login credentials. Please try again.</small>
+                        <button type="submit" id="loginBtn">Login</button>
                         <small id="footerTxt" class="form-text text-muted">Need an account? <a href="#">Sign Up</a></small>
                     </form>
                 </div>
@@ -128,6 +132,18 @@
                 // Show the overlay and modal
                 overlay.style.display = 'flex';
             });
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.addEventListener('click', () => {
+                // check if valid inputs
+                // authenticate
+                let valid = false;
+                if (valid) {
+                    window.location.href = 'crud.html';
+                }
+                else {
+                    document.getElementById('invalidLogin').style.display = 'block';
+                }
+            }); 
         </script>
     </body>
 </html>

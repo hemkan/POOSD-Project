@@ -92,8 +92,8 @@ if(!isset($_SESSION['user']))
     <body>
         <header>
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="#"><img src="logo.png" alt="Home" width="50px"></a>
-                <a href="index.html" id="login" class="btn ml-auto">Logout</a>
+                <a class="navbar-brand" href="#"><img src="../images/logo.png" alt="Home" width="50px"></a>
+                <a href="../index.html" id="login" class="btn ml-auto">Logout</a>
             </nav>
         </header>
         <div class="container mt-3">

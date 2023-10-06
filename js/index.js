@@ -62,7 +62,7 @@ signupBtn.addEventListener('click', () => {
         registerUser(login);
         // ready to send to the backedn
         // store email and password 
-        window.location.href = 'crud.html';
+        window.location.href = '../pages/crud.php';
     }
     else {
         document.getElementById('invalidSignup').style.display = 'block';

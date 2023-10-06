@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/5d8ee741cc.js" crossorigin="anonymous"></script>
         <style>
             body {
                 margin: 0;
@@ -84,6 +85,13 @@
             /* #invalidSignup {
                 color: red;
             } */
+            #closeS:hover, #closeL:hover {
+                transform: scale(1.1);
+            }
+            /* .navbar {
+                margin: 0;
+                padding: 0;
+            } */
         </style>
     </head>
     <body>
@@ -98,6 +106,9 @@
             </div>
         </div>
         <div class="loginOverlay">
+            <!-- <nav class="navbar navbar-expand-lg">
+                <a class="" id="closeL"><i class="fa-solid fa-chevron-left"></i></a>
+            </nav> -->
             <center>
                 <div class="container mt-5">
                     <form class="card" style="width: 60vh;">
@@ -118,6 +129,9 @@
             </center>
         </div>
         <div class="signupOverlay">
+            <!-- <nav class="navbar navbar-expand-lg">
+                <a class="" id="closeS"><i class="fa-solid fa-chevron-left"></i></a>
+            </nav> -->
             <center>
                 <div class="container mt-5">
                     <form class="card" style="width: 60vh;">
@@ -168,6 +182,9 @@
                 // document.getElementById('email_inp').value = '';
                 // const head = document.getElementById('heading');
                 // head.textContent = 'Login';
+                document.getElementById('email_inp').value = '';
+                document.getElementById('passwrd_inp').value = '';
+                document.getElementById('invalidLogin').style.display = 'none';
                 showOverlay(overlayL);
                 hideOverlay(overlayS);
                 // Show the overlay and modal
@@ -175,12 +192,14 @@
             });
             const loginBtn = document.getElementById('loginBtn');
             loginBtn.addEventListener('click', () => {
-                document.getElementById('email_inp').value = '';
-                document.getElementById('password_inp').value = '';
+                
                 // check if valid inputs
                 // authenticate
                 let valid = false;
                 if (valid) {
+                    // document.getElementById('email_inp').value = '';
+                    // document.getElementById('passwrd_inp').value = '';
+                    // document.getElementById('invalidLogin').style.display = 'none';
                     window.location.href = 'crud.html';
                 }
                 else {
@@ -194,6 +213,11 @@
                 // document.getElementById('phone_inp').value = '';
                 // document.getElementById('email_inp').value = '';
                 // const head = document.getElementById('heading');
+                document.getElementById('email_inpS').value = '';
+                document.getElementById('passwrd_inpS').value = '';
+                document.getElementById('phone_inp').value = '';
+                document.getElementById('first').value = '';
+                document.getElementById('last').value = '';
                 // head.textContent = 'Login';
                 showOverlay(overlayS);
                 hideOverlay(overlayL);
@@ -202,11 +226,8 @@
             });
             const signupBtn = document.getElementById('signupBtn');
             signupBtn.addEventListener('click', () => {
-                document.getElementById('email_inpS').value = '';
-                document.getElementById('password_inpS').value = '';
-                document.getElementById('phone_inp').value = '';
-                document.getElementById('first').value = '';
-                document.getElementById('last').value = '';
+                
+                document.getElementById('invalidSignup').style.display = 'none';
                 // check if valid inputs
                 // authenticate
                 let valid = false;
@@ -221,7 +242,9 @@
             const login_small = document.getElementById('login_small');
             login_small.addEventListener('click', () => {
                 document.getElementById('email_inp').value = '';
-                document.getElementById('password_inp').value = '';
+                document.getElementById('passwrd_inpS').value = '';
+                document.getElementById('invalidLogin').style.display = 'none';
+
                 showOverlay(overlayL);
                 hideOverlay(overlayS);
             });
@@ -229,23 +252,35 @@
             const signup_small = document.getElementById('signup_small');
             signup_small.addEventListener('click', () => {
                 document.getElementById('email_inpS').value = '';
-                document.getElementById('password_inpS').value = '';
+                document.getElementById('passwrd_inpS').value = '';
                 document.getElementById('phone_inp').value = '';
                 document.getElementById('first').value = '';
                 document.getElementById('last').value = '';
+                document.getElementById('invalidSignup').style.display = 'none';
+
                 showOverlay(overlayS);
                 hideOverlay(overlayL);
                 // Show the overlay and modal
                 // overlayS.style.display = 'flex';
             });
             
-
             function showOverlay(overlay) {
                 overlay.style.display = 'flex';
             }
             function hideOverlay(overlay) {
                 overlay.style.display = 'none';
             }
+
+            // ------------close---------------------------
+            const closeL = document.getElementById('closeL');
+            closeL.addEventListener('click', function() {
+                showOverlay(overlayL);
+            });
+            const closeS = document.getElementById('closeS');
+            closeS.addEventListener('click', function() {
+                showOverlay(overlayS);
+            });
+            // --------------------------------------------
         </script>
     </body>
 </html>

@@ -29,7 +29,7 @@ function loginUser(loginData) {
                 if (data.success) {
                     console.log('successful login attempt redirect to user page.');
                     alert(data.success);
-                    window.location.href = 'pages/userPage.php';
+                    window.location.href = 'pages/crud.php';
                 } else if (data.error) {
                     alert(data.error);
                 }

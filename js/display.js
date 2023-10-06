@@ -175,18 +175,17 @@ saveButton.addEventListener('click', function (event) {
 
         // TODO: if input_correct
         // js object with the contact data
-        const newContact = {
-            // id: number-from-backEnd,
-            "first_name": firstName,
-            "last_name": lastName,
-            "email": email,
-            "phone": phone,
-            "data": new Date(),
-        };
-    // }
-    // add the new contact to the array we print from = api
-    jsonData.push(newContact);
-    // TODO: add to API
+         const newContact = {
+             // id: number-from-backEnd,
+             "first_name": firstName,
+             "last_name": lastName,
+             "email": email,
+             "phone": phone
+             //"data": new Date(), date is recorded on backend 
+         };
+     // }
+     // add the new contact to the array we print from = api
+        createContact(newContact);
 
     // clear the input fields
     document.getElementById('first').value = '';

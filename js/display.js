@@ -1,9 +1,9 @@
-import { searchInput, deleteContact } from "./search.js";
+//import { searchInput, deleteContact } from "./search.js";
 
-const jsonData = [
-    { contact_id: 1, "first_name": "John", "last_name": "Doe", "email": "john@example.com", "phone": "1234567890", "date": new Date(2023, 0, 1, 12, 30)},
-    { contact_id: 2, "first_name": "Jane", "last_name": "Smith", "email": "jane@example.com", "phone": "9876543210", "date": new Date(2023, 0, 2, 14, 15)},
-];
+// const jsonData = [
+//     { contact_id: 1, "first_name": "John", "last_name": "Doe", "email": "john@example.com", "phone": "1234567890", "date": new Date(2023, 0, 1, 12, 30)},
+//     { contact_id: 2, "first_name": "Jane", "last_name": "Smith", "email": "jane@example.com", "phone": "9876543210", "date": new Date(2023, 0, 2, 14, 15)},
+// ];
 function populateTable(data) {
     // const tableBody = document.getElementById('table-body');
     const tableBody = document.getElementById('table-body');
@@ -290,4 +290,4 @@ input.addEventListener('input', () => {
 // // ---------------------------------------------
 
 
-export { populateTable };
+//export { populateTable };

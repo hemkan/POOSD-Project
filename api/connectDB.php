@@ -3,7 +3,7 @@
     function connect_db()
     {
         $db_servername = "localhost";
-        $db_username = "root"; // change the user name
+        $db_username = "webuser"; // change the user name
         $db_password = "25WindmillCat71323";
         $db_name = "slp_7";
     

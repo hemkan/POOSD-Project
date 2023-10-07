@@ -1,6 +1,7 @@
 <?php
 
     include 'functions.php';
+    error_log('in a_read');
 
     session_start();
     // session_unset();
@@ -14,7 +15,7 @@
         exit;
     }
     else{
-        error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
+        error_log('session_data from a_read page: ' . print_R($_SESSION['user'], true));
     }
     $user_id = $_SESSION['user']['user_id'];
 
@@ -36,6 +37,7 @@
         // ...goes back to the js
         // $decoded = json_encode($result, JSON_PRETTY_PRINT);
         // echo "<script>var data =$decoded;</script>"
+        error_log('result: ' . print_r($result, true));
         
         echo json_encode($result, JSON_PRETTY_PRINT);
     }

@@ -149,7 +149,7 @@ function hideOverlay(overlay) {
 // -------------isValid------------------------
 function isValidEmail_P(email, password, id) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isPasswordValid = password.length >= 6;
+    const isPasswordValid = password.length >= 3;
     const isEmailValid = emailRegex.test(email);
     console.log(isPasswordValid, isEmailValid);
     if (email === '' || password === '') {

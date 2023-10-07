@@ -46,26 +46,8 @@ function formatPhoneN(number) {
 }
 
 function formatTime(time) {
-    const now = new Date();
-    const diff = now - time;
-    const msPerMinute = 60 * 1000;
-    const msPerHour = msPerMinute * 60;
-    const msPerDay = msPerHour * 24;
-    const msPerMonth = msPerDay * 30;
-    const msPerYear = msPerDay * 365;
-    if (diff < msPerMinute) {
-        return 'now';
-    } else if (diff < msPerHour) {
-        return Math.round(diff / msPerMinute) + 'm';
-    } else if (diff < msPerDay) {
-        return Math.round(diff / msPerHour) + 'h';
-    } else if (diff < msPerMonth) {
-        return Math.round(diff / msPerDay) + 'd';
-    } else if (diff < msPerYear) {
-        return Math.round(diff / msPerMonth) + 'mo';
-    } else {
-        return Math.round(diff / msPerYear) + 'y';
-    }
+    const [year, month, day] = time.split('-');
+    return (month + '/' + day + '/' + year);
 }
 
 function createDropdownMenu(item) {

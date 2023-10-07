@@ -94,7 +94,8 @@ if(!isset($_SESSION['user']))
                 text-align: center;
             }
         </style>
-        <script type="module" src="../js/search.js"></script>
+        <!-- <script type="module" src="../js/search.js"></script> -->
+        
 
     </head>
     <body>
@@ -193,9 +194,11 @@ if(!isset($_SESSION['user']))
         <script src="../js/createContactHandler_slp7.js"></script>
         <script src="../js/search.js"></script>
         <script src="../js/display.js"></script>
+        <script src="../js/search.js"></script>
+        
        
 
-        </script>
+    <!-- </script> -->
     </body>
 
 </html>

@@ -142,6 +142,19 @@ saveButton.addEventListener('click', function (event) {
             "new_phone": deFormatPhone(phone),
             //"date": time,
         };
+        // let ifCreated = updateContact(editedContact);
+        // if (ifCreated)
+        // {
+        //     if (ifCreated === 1) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     } else if (ifCreated === 2) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     }
+        // }
+     
+        
 
         updateContact(editedContact);
         searchInput();
@@ -184,6 +197,17 @@ saveButton.addEventListener('click', function (event) {
      // }
      // add the new contact to the array we print from = api
         createContact(newContact);
+        // let ifCreated = createContact(newContact);
+        // if (ifCreated)
+        // {
+        //     if (ifCreated === 1) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     } else if (ifCreated === 2) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     }
+        // }
 
     // clear the input fields
     document.getElementById('first').value = '';

@@ -89,7 +89,7 @@ function deleteContact(contact_id)
     let new_string = {id:contact_id};
     let send_json = JSON.stringify(new_string);
     let process = new XMLHttpRequest();
-    process.open("POST", "/small_project/POOSD-Project/api/delete.php", true);
+    process.open("POST", "/api/delete.php", true);
     process.setRequestHeader("Content-type", "application/json");
 
     process.onreadystatechange = function() 

@@ -79,7 +79,7 @@
         function delete_contact($contact_id)
         {
             $connect = connect_db();
-            $sql = "DELETE FROM contacts_2 C WHERE C.contact_id = '$contact_id'";
+            $sql = "DELETE FROM contacts C WHERE C.contact_id = '$contact_id'";
             $sql_result = mysqli_query($connect, $sql);
 
             // echo $sql_result;

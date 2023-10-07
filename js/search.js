@@ -1,4 +1,4 @@
-import { populateTable } from './display.js';
+//import { populateTable } from './display.js';
 // import { populateTable } from './display.js';
 
 // delete this function
@@ -26,7 +26,7 @@ function loadAllContact()
     // let new_string = {id:user_id};
     // let send_json = JSON.stringify(new_string);
     let process = new XMLHttpRequest();
-    process.open("POST", "/small_project/POOSD-Project/api/a_read.php", true);
+    process.open("POST", "/api/a_read.php", true);
     process.setRequestHeader("Content-type", "application/json");
 
     process.onreadystatechange = function() 
@@ -35,7 +35,9 @@ function loadAllContact()
         {
 
             let obj = (process.responseText);
+            console.log(obj);
             let data = JSON.parse(obj);
+            console.log(data);
             populateTable(data);
         }
     };
@@ -47,6 +49,7 @@ function searchInput()
     // modify this to store the current user id
     // let user_id = 1;
     let text = new String(document.getElementById("search-bar-input").value);
+    console.log('text: ', text);
 
     // alert(text);
     if (text.length > 0)
@@ -55,16 +58,17 @@ function searchInput()
         let new_string = {search_string:text};
         let send_json = JSON.stringify(new_string);
         let process = new XMLHttpRequest();
-        process.open("POST", "/small_project/POOSD-Project/api/a_search.php", true);
+        process.open("POST", "/api/a_search.php", true);
         process.setRequestHeader("Content-type", "application/json");
         
         process.onreadystatechange = function() 
         {
             if (this.readyState == 4 && this.status == 200)
             {
-                
+                console.log('response search input: ', process.responseText)
                 let obj = (process.responseText);
                 let data = JSON.parse(obj);
+                console.log(data);
                 populateTable(data);
             }
         };
@@ -109,4 +113,4 @@ function main()
 
 main();
 
-export { searchInput, deleteContact };
+//export { searchInput, deleteContact };

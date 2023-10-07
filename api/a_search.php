@@ -12,7 +12,7 @@
         exit;
     }
     else{
-        error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
+        error_log('session_data from search page: ' . print_R($_SESSION['user'], true));
     }
     // $_SESSION['user']['user_id'] = 1;
     $user_id = $_SESSION['user']['user_id'];

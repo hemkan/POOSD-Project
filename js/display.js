@@ -1,4 +1,4 @@
-import { searchInput, deleteContact } from "./search.js";
+//import { searchInput, deleteContact } from "./search.js";
 
 // const jsonData = [
 //     { contact_id: 1, "first_name": "John", "last_name": "Doe", "email": "john@example.com", "phone": "1234567890", "date": new Date(2023, 0, 1, 12, 30)},
@@ -290,4 +290,4 @@ input.addEventListener('input', () => {
 // // ---------------------------------------------
 
 
-export { populateTable };
+//export { populateTable };

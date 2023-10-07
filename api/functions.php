@@ -50,8 +50,9 @@
 
         function load_contact($access_id)
         {
+            error_log('access id: ' . print_r($access_id,true));
             $connect = connect_db();
-            $sql = "SELECT * FROM contacts_2 C WHERE C.access_id = '$access_id'";
+            $sql = "SELECT * FROM contacts C WHERE C.access_id = '$access_id'";
             $sql_result = mysqli_query($connect, $sql);
 
             // $result = array();
@@ -70,8 +71,9 @@
             //     $curr_index++;
             // }
 
-            // return $result;
-            return ($this->load_array($sql_result));
+            $result = $this->load_array($sql_result);
+            error_log('load array: ' . print_r($result, true));
+            return ($result);
         }
 
         function delete_contact($contact_id)
@@ -100,7 +102,7 @@
             // $text = 'josh';
 
             // change the table and the variable name to remote db
-            $sql = "SELECT * FROM contacts_2 C
+            $sql = "SELECT * FROM contacts C
                                         -- WHERE LOCATE('$text', C.first_name) > 0
                                         WHERE (C.first_name LIKE '%$text%'
                                         OR C.last_name LIKE '%$text%')

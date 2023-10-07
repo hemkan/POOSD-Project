@@ -27,16 +27,16 @@ loginBtn.addEventListener('click', (e) => {
         };
         console.log('sending: ', loginData);
         // loginUser(loginData)
-        loginUser(loginData)
-        // if (!loginUser(loginData))
-        if(false)
+        // loginUser(loginData)
+        if (!loginUser(loginData))
+        // if(false)
         {
             document.getElementById('invalidLogin').textContent = 'Invalid login credentials. Please try again.';
         }
-        else {
-            console.log('logged in');
-            window.location.href = '../pages/crud.php';
-        }
+        // else {
+        //     console.log('logged in');
+        //     window.location.href = '../pages/crud.php';
+        // }
     }
     else {
         document.getElementById('invalidLogin').style.display = 'block';
@@ -79,16 +79,16 @@ signupBtn.addEventListener('click', (e) => {
             //"date": new Date(),
         };
 
-        registerUser(login);
-        // if (!registerUser(login)) {
-        if(false)
-        {
+        // registerUser(login);
+        
+        // if(false)
+        if (!registerUser(login)) {
             document.getElementById('invalidLogin').textContent = 'Email is already registered. Please use a different email.';
         }
-        else {
-            console.log('created profile and logged in');
-            window.location.href = '../pages/crud.php';
-        }
+        // else {
+        //     console.log('created profile and logged in');
+        //     window.location.href = '../pages/crud.php';
+        // }
     }
         // ready to send to the backedn
         // store email and password 

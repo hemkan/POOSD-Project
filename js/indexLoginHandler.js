@@ -37,6 +37,7 @@ function loginUser(loginData) {
                 }
             } else if (xhr.status === 401) {
                 // Handle 401 Unauthorized error
+
                 console.log('Invalid email or Password');
                 return false;
 
@@ -45,6 +46,7 @@ function loginUser(loginData) {
                 // Handle 404 Not Found error
                 console.log('email not recognized.');
                 return false;
+
             } else {
                 // Handle other HTTP response errors
                 alert('An error occurred during login. Please try again later.');

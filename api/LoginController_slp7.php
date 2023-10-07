@@ -26,11 +26,9 @@ class LoginController
 
         if($email && password_verify($postData['password'], $email['hashed_password']))
         {
-            error_log('performing login');
             new PerformLogin($email);
             return ['success' => 'Login Successful'];
         }else if (!$email){
-            error_log('bad email');
             http_response_code(404);
             return ['error' => 'email not recognized.'];
         }else

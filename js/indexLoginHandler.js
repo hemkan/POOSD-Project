@@ -28,17 +28,25 @@ function loginUser(loginData) {
                 var data = JSON.parse(xhr.responseText);
                 if (data.success) {
                     console.log('successful login attempt redirect to user page.');
-                    alert(data.success);
+                    //alert(data.success);
                     window.location.href = 'pages/crud.php';
+                    return true;
                 } else if (data.error) {
+                    return false;
                     alert(data.error);
                 }
             } else if (xhr.status === 401) {
                 // Handle 401 Unauthorized error
-                alert('Invalid email or Password');
+
+                console.log('Invalid email or Password');
+                return false;
+
+
             } else if (xhr.status === 404) {
                 // Handle 404 Not Found error
-                alert('email not recognized.');
+                console.log('email not recognized.');
+                return false;
+
             } else {
                 // Handle other HTTP response errors
                 alert('An error occurred during login. Please try again later.');

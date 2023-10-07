@@ -143,6 +143,7 @@ function hideOverlay(overlay) {
 // closeS.addEventListener('click', function() {
 //     showOverlay(overlayS);
 // });
+
 // --------------------------------------------
 
 // -------------isValid------------------------
@@ -204,4 +205,3 @@ function isPhoneValid(phone) {
 
 function errormsg(email, passwrd) {
 }
-// ------------------------------------------

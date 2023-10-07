@@ -1,15 +1,22 @@
 <?php
 // check for session
-session_start();
+
+session_set_cookie_params(0); // expire cookies on exit
+ini_set('session.gc_maxlifetime', 1800); 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if(!isset($_SESSION['user']))
 {
     echo '<p>You are being redirected to log in...</p>';
     error_log('session not valid');
-    header('Location: ../');
-    
+
+    header('Location: ../index.html');
+    session_abort();
     exit;
 }else{
-    error_log('session_data from user page: ' . print_R($_SESSION['user'], true));
+    error_log('session_data from user page: ' . print_r($_SESSION['user'], true));
 }
 
 ?>
@@ -94,7 +101,9 @@ if(!isset($_SESSION['user']))
         <header>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"><img src="../images/logo.png" alt="Home" width="50px"></a>
-                <a href="../index.html" id="login" class="btn ml-auto">Logout</a>
+
+                <a href="/api/logout.php" id="login" class="btn ml-auto">Logout</a>
+
             </nav>
         </header>
         <div class="container mt-3">
@@ -187,4 +196,6 @@ if(!isset($_SESSION['user']))
 
         </script>
     </body>
+
 </html>
+

@@ -9,7 +9,9 @@ function registerUser(registrationData) {
 
     // Define the URL for your PHP script 
     event.preventDefault();
-    let url = '../api/RegistrationContorller_slp7.php';
+
+    let url = 'api/RegistrationController_slp7.php';
+
 
     // Create a fetch request
     fetch(url, {
@@ -32,7 +34,8 @@ function registerUser(registrationData) {
         // Handle the JSON response data
         if (data.success) {
             alert(data.success);
-            window.location.href = '../Login_RegistrationForm.html';
+
+            window.location.href = '/index.html';
         } else if (data.error) {
             console.log('issues later')
             alert(data.error);

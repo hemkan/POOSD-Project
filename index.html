@@ -92,6 +92,12 @@
                 margin: 0;
                 padding: 0;
             } */
+            .header {
+                position: absolute;
+                top: 10px; /* Adjust the top position as needed */
+                left: 10px; /* Adjust the right position as needed */
+                z-index: 999;
+            }
         </style>
     </head>
     <body>
@@ -106,11 +112,13 @@
             </div>
         </div>
         <div class="loginOverlay">
-            <!-- <nav class="navbar navbar-expand-lg">
-                <a class="" id="closeL"><i class="fa-solid fa-chevron-left"></i></a>
-            </nav> -->
-            <center>
-                <div class="container mt-5">
+            <header class="header">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="" id="closeL"><i class="fa-solid fa-chevron-left"></i></a>
+                </nav>
+            </header>
+            <div class="container mt-5">
+                <center>
                     <form class="card" id="loginForm" style="width: 60vh;">
                         <h1 id="heading">Login</h1>
                         <div class="form-group">
@@ -125,15 +133,17 @@
                         <button type="submit" id="loginBtn">Login</button>
                         <small id="footerTxt" class="form-text text-muted">Need an account? <a href="#" id="signup_small">Sign Up</a></small>
                     </form>
-                </div>
-            </center>
+                </center>
+            </div>
         </div>
         <div class="signupOverlay">
-            <!-- <nav class="navbar navbar-expand-lg">
-                <a class="" id="closeS"><i class="fa-solid fa-chevron-left"></i></a>
-            </nav> -->
-            <center>
-                <div class="container mt-5">
+            <header class="header">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="" id="closeS"><i class="fa-solid fa-chevron-left"></i></a>
+                </nav>
+            </header>
+            <div class="container mt-5">
+                <center>
                     <form class="card" style="width: 60vh;">
                         <h1 id="heading">Sign Up</h1>
                         <div class="form-row">
@@ -162,8 +172,8 @@
                         <button type="submit" id="signupBtn">Sign Up</button>
                         <small id="signUp" class="form-text text-muted">Have an account? <a href="#" id="login_small">Login</a></small>
                     </form>
-                </div>
-            </center>
+                </center>
+            </div>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

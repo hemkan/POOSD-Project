@@ -93,6 +93,9 @@ if(!isset($_SESSION['user']))
                 padding-bottom: 2vh;
                 text-align: center;
             }
+            #invalidMessage {
+                color: red;
+            }
         </style>
         <!-- <script type="module" src="../js/search.js"></script> -->
         
@@ -131,14 +134,18 @@ if(!isset($_SESSION['user']))
                                         <label for="last">Last Name</label>
                                         <input type="text" class="form-control" id="last" placeholder="Last">
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="phone_inp">Phone</label>
-                                    <input type="tel" class="form-control" id="phone_inp" placeholder="(123)-457-789">
                                 </div>
                                 <div class="form-group">
                                     <label for="email_inp">Email</label>
                                     <input type="email" class="form-control" id="email_inp" placeholder="abc@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone_inp">Phone</label>
+                                    <input type="tel" class="form-control" id="phone_inp" placeholder="(123)-457-789">
+                                </div>
+                                <div>
+                                    <small id="invalidMessage" style="display: none;">Signup failed. Please try again.</small>
+                                <br>
                                 </div>
                                 <center><button class="text-center btn" id="createBtn" type="submit">Save</button></center>
                             </form>

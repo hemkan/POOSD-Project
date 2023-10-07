@@ -135,14 +135,16 @@ function hideOverlay(overlay) {
 
 
 // ------------close---------------------------
-// const closeL = document.getElementById('closeL');
-// closeL.addEventListener('click', function() {
-//     showOverlay(overlayL);
-// });
-// const closeS = document.getElementById('closeS');
-// closeS.addEventListener('click', function() {
-//     showOverlay(overlayS);
-// });
+const closeL = document.getElementById('closeL');
+closeL.addEventListener('click', function() {
+    hideOverlay(overlayS);
+    hideOverlay(overlayL);
+});
+const closeS = document.getElementById('closeS');
+closeS.addEventListener('click', function() {
+    hideOverlay(overlayS);
+    hideOverlay(overlayL);
+});
 
 // --------------------------------------------
 
@@ -203,5 +205,3 @@ function isPhoneValid(phone) {
     }
 }
 
-function errormsg(email, passwrd) {
-}

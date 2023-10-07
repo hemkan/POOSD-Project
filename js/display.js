@@ -147,18 +147,23 @@ saveButton.addEventListener('click', function (event) {
         // TODO: input_correct
         const editedContact = {
             "contact_id": editContactId, // Add the ID to the edited contact
-            "first_name": firstName,
-            "last_name": lastName,
-            "email": email,
-            "phone": phone,
-            "date": time,
+            "new_first": firstName,
+            "new_last": lastName,
+            "new_email": email,
+            "new_phone": phone,
+            //"date": time,
         };
-        const index = jsonData.findIndex(item => item.contact_id == editContactId);
 
-        if (index !== -1) {
-            jsonData[index] = editedContact;
-            // api 
-        }
+        updateContact(editedContact);
+        searchInput();
+        
+        //const index = jsonData.findIndex(item => item.contact_id == editContactId);
+        //console.log('index: ', index);
+
+        //  if (index !== -1) {
+        //      jsonData[index] = editedContact;
+        //      // api 
+        //  }
 
         // reset save button
         saveButton.dataset.editContactId = '';
@@ -169,8 +174,6 @@ saveButton.addEventListener('click', function (event) {
 
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = ''; // Clear the table
-        populateTable(jsonData);
-        return;
     }
 
         // TODO: if input_correct

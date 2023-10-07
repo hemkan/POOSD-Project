@@ -126,10 +126,18 @@ signup_small.addEventListener('click', () => {
 });
 
 function showOverlay(overlay) {
-    overlay.style.display = 'flex';
+    // overlay.style.display = 'flex';
+    overlay.style.display = "flex"; // Show the overlay
+    setTimeout(function() {
+        overlay.style.opacity = "1"; // Fade it in
+    }, 10);
 }
 function hideOverlay(overlay) {
-    overlay.style.display = 'none';
+    // overlay.style.display = 'none';
+    overlay.style.opacity = "0"; // Fade it out
+    setTimeout(function() {
+        overlay.style.display = "none"; // Hide the overlay
+    }, 300); // Wait for the transition to complete
 }
 // ----------------------------------------------------
 

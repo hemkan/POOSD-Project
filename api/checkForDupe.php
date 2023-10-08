@@ -75,7 +75,9 @@ class DuplicateChecker
         }else if ($emailFlag) {
             
             error_log('Contact exist with same email.');
-            return ['error'=> 'Contact exist with same email.'];            
+            return ['error'=> 'Contact exist with same email.'];
+
+            
         }
     }
 }

@@ -45,18 +45,18 @@ class RetrieveContacts
                 )");
 
             // Bind parameters
-            error_log('Global user ID: ' . print_r($GLOBALS['user_id'], true));
+            //error_log('Global user ID: ' . print_r($GLOBALS['user_id'], true));
             $statement->bindParam(':access_id', $GLOBALS['user_id'], PDO::PARAM_INT);
             $statement->bindParam(':input', $input, PDO::PARAM_STR);
         }
 
         if (!$statement->execute()) {
-            error_log("Query execution failed: " . print_r($statement->errorInfo(), true));
+            //error_log("Query execution failed: " . print_r($statement->errorInfo(), true));
         }
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        error_log('Result: ' . print_r($result, true));
+        //error_log('Result: ' . print_r($result, true));
 
         return $result;
     }
@@ -65,7 +65,7 @@ class RetrieveContacts
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['input'])) {
         $input = $_GET['input'];
-        error_log('Input: ' . print_r($input, true));
+        //error_log('Input: ' . print_r($input, true));
 
         $pdo = createPDO();
 
@@ -79,8 +79,8 @@ try {
         echo json_encode($contacts);
     } else {
         $input = $_GET['input'];
-        error_log('In the else block on the search contacts file');
-        error_log('Input: ' . print_r($input, true));
+        //error_log('In the else block on the search contacts file');
+        //error_log('Input: ' . print_r($input, true));
         echo json_encode(array('error' => 'Invalid request to search.'));
     }
 } catch (PDOException $e) {

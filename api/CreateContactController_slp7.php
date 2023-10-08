@@ -2,6 +2,8 @@
 // CreateContact.php
 
 require_once('../config/database.php');
+require_once('checkForDupe.php');
+
 session_start();
 if(!isset($_SESSION['user']))
 {
@@ -11,16 +13,17 @@ if(!isset($_SESSION['user']))
     
     exit;
 }else{
-    error_log('session_data from create contact: ' . print_R($_SESSION['user'], true));
+    error_log('session_data from create contact: ' . print_r($_SESSION['user'], true));
     
 }
 
-error_log('session_data before assignment: ' . print_R($_SESSION['user'], true));
+error_log('session_data before assignment: ' . print_r($_SESSION['user'], true));
 
 $access_id = $_SESSION['user']['user_id']; 
 
 class CreateContact 
 {
+    const NEW_CONTACT_ID = -1;
     private $pdo; // PDO instance
 
     public function __construct($pdo)
@@ -45,7 +48,32 @@ class CreateContact
 
         if(empty($access_id)||empty($first_name)||empty($last_name)||empty($email)||empty($phone)||empty($addDate))
         {
+            http_response_code(400);
             return ['error' => 'Contact name, email, and phone number are required.'];
+        }else if (!filter_var($email, FILTER_VALIDATE_EMAIL) )
+        {
+            http_response_code(400);
+            if(strlen($phone) != 10){
+                return ['error' => 'Invalid phone number and email. Please enter a valid phone number and email.<br>P: (123)-456-7890 Email: example@example.com'];
+            }
+            
+            return ['error' => 'Invalid email. Please follow format<br>example@example.com'];
+            
+        }else if(strlen($phone) != 10){
+
+            http_response_code(400);
+            return ['error' => 'Invalid phone number. Please enter 10 digitnumber<br>(123)-456-7890'];
+
+        }
+
+        // check if another contact_id mathces the phone or email
+        $checker = new DuplicateChecker($this->pdo); // Reuse the existing $pdo instance
+        $result = $checker->checkForDuplicateContacts($access_id, self::NEW_CONTACT_ID , $email, $phone);
+
+
+        if(isset($result['error'])){
+            http_response_code(409);
+            return $result;
         }
 
         // Prepare SQL statement to insert contacts into the database
@@ -90,7 +118,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Call the addContact method with user input
     $result = $controller->addContact($postData);
 
-    // Output the result as JSON
-    echo json_encode($result);
+    if (isset($result['success'])) {
+        // Create an associative array with just the success message
+        $response = $result['success'];
+        // Encode the response as JSON and send it
+        
+    } elseif (isset($result['error'])) {
+        // Handle error case here
+        // You can access the error message as $result['error']
+        // Set appropriate HTTP response code for errors
+        $response = $result['error'];
+    }
+
+    echo json_encode($response);
 }
 ?>

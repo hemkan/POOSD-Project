@@ -84,7 +84,7 @@ if(!isset($_SESSION['user']))
                 height: 100%;
                 background-color: rgb(255, 255, 255);
                 z-index: 999;
-                transition: .3s;
+                transition: opacity 0.3s;
             }
             #heading {
                 text-transform: uppercase;
@@ -93,6 +93,24 @@ if(!isset($_SESSION['user']))
                 padding-bottom: 2vh;
                 text-align: center;
             }
+            #invalidMessage {
+                color: red;
+            }
+            #ECForm {
+                width: 60vh;
+            }
+            @media (max-width: 450px) {
+                .createBtn {
+                    width: 100%;
+                }
+                #ECForm {
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                .form-control {
+                    width: 100%;
+                }
         </style>
         <!-- <script type="module" src="../js/search.js"></script> -->
         
@@ -120,7 +138,7 @@ if(!isset($_SESSION['user']))
                             <a href="../index.html" id="loginC" class="btn ml-auto">Logout</a>
                         </nav>
                         <div class="container mt-5">
-                            <form class="container mt-5" style="width: 60vh;">
+                        <form class="container mt-5" id="ECForm">
                                 <h1 id="heading">Create Contact</h1>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -131,14 +149,18 @@ if(!isset($_SESSION['user']))
                                         <label for="last">Last Name</label>
                                         <input type="text" class="form-control" id="last" placeholder="Last">
                                     </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="phone_inp">Phone</label>
-                                    <input type="tel" class="form-control" id="phone_inp" placeholder="(123)-457-789">
                                 </div>
                                 <div class="form-group">
                                     <label for="email_inp">Email</label>
                                     <input type="email" class="form-control" id="email_inp" placeholder="abc@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone_inp">Phone</label>
+                                    <input type="tel" class="form-control" id="phone_inp" placeholder="(123)-457-789">
+                                </div>
+                                <div>
+                                    <small id="invalidMessage" style="display: none;">Signup failed. Please try again.</small>
+                                <br>
                                 </div>
                                 <center><button class="text-center btn" id="createBtn" type="submit">Save</button></center>
                             </form>

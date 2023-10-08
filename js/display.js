@@ -46,26 +46,8 @@ function formatPhoneN(number) {
 }
 
 function formatTime(time) {
-    const now = new Date();
-    const diff = now - time;
-    const msPerMinute = 60 * 1000;
-    const msPerHour = msPerMinute * 60;
-    const msPerDay = msPerHour * 24;
-    const msPerMonth = msPerDay * 30;
-    const msPerYear = msPerDay * 365;
-    if (diff < msPerMinute) {
-        return 'now';
-    } else if (diff < msPerHour) {
-        return Math.round(diff / msPerMinute) + 'm';
-    } else if (diff < msPerDay) {
-        return Math.round(diff / msPerHour) + 'h';
-    } else if (diff < msPerMonth) {
-        return Math.round(diff / msPerDay) + 'd';
-    } else if (diff < msPerYear) {
-        return Math.round(diff / msPerMonth) + 'mo';
-    } else {
-        return Math.round(diff / msPerYear) + 'y';
-    }
+    const [year, month, day] = time.split('-');
+    return (month + '/' + day + '/' + year);
 }
 
 function createDropdownMenu(item) {
@@ -122,6 +104,7 @@ createButton.addEventListener('click', () => {
     document.getElementById('last').value = '';
     document.getElementById('phone_inp').value = '';
     document.getElementById('email_inp').value = '';
+    document.getElementById('invalidMessage').style.display = 'none';
     const head = document.getElementById('heading');
     head.textContent = 'Create Contact';
 
@@ -142,6 +125,12 @@ saveButton.addEventListener('click', function (event) {
     const email = document.getElementById('email_inp').value;
     const time = new Date();
 
+    // check if valid info
+    if (!isValid(firstName, lastName, phone, email)) {
+        document.getElementById('invalidMessage').style.display = 'block';
+        return;
+    }
+
     const editContactId = saveButton.dataset.editContactId; // Get the edited contact ID
     if (editContactId) {
         // TODO: input_correct
@@ -150,9 +139,22 @@ saveButton.addEventListener('click', function (event) {
             "new_first": firstName,
             "new_last": lastName,
             "new_email": email,
-            "new_phone": phone,
+            "new_phone": deFormatPhone(phone),
             //"date": time,
         };
+        // let ifCreated = updateContact(editedContact);
+        // if (ifCreated)
+        // {
+        //     if (ifCreated === 1) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     } else if (ifCreated === 2) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     }
+        // }
+     
+        
 
         updateContact(editedContact);
         searchInput();
@@ -175,6 +177,13 @@ saveButton.addEventListener('click', function (event) {
 
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = ''; // Clear the table
+
+        // populateTable(jsonData);
+        document.getElementById('first').value = '';
+        document.getElementById('last').value = '';
+        document.getElementById('phone_inp').value = '';
+        document.getElementById('email_inp').value = '';
+      
         return;
     }
 
@@ -185,12 +194,23 @@ saveButton.addEventListener('click', function (event) {
              "first_name": firstName,
              "last_name": lastName,
              "email": email,
-             "phone": phone
+             "phone": deFormatPhone(phone),
              //"data": new Date(), date is recorded on backend 
          };
      // }
      // add the new contact to the array we print from = api
         createContact(newContact);
+        // let ifCreated = createContact(newContact);
+        // if (ifCreated)
+        // {
+        //     if (ifCreated === 1) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     } else if (ifCreated === 2) {
+        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+        //         document.getElementById('invalidMessage').style.display = 'block';
+        //     }
+        // }
 
     // clear the input fields
     document.getElementById('first').value = '';
@@ -211,6 +231,10 @@ saveButton.addEventListener('click', function (event) {
 
 // ---------------edit button-----------------
 function editEventHandler(data) {
+    document.getElementById('first').value = '';
+    document.getElementById('last').value = '';
+    document.getElementById('phone_inp').value = '';
+    document.getElementById('email_inp').value = '';
     // Show the overlay and modal
     return () => editOverlay(data);
 }
@@ -278,7 +302,25 @@ close.addEventListener('click', function() {
 
 // -------------input in search bar-------------
 const input = document.getElementById('search-bar-input');
+const inputC = document.getElementById('search-bar-container');
+inputC.addEventListener('mouseenter', () => {
+    input.focus();
+    input.style.width = '150px';
+    input.style.borderBottom = '1px solid #ccc';
+});
+inputC.addEventListener('mouseleave', () => {
+    if (document.getElementById('search-bar-input').value === '')
+    {
+        input.style.width = '0px';
+        input.style.borderBottom = '';
+    }
+});
 input.addEventListener('input', () => {
+    if (document.getElementById('search-bar-input').value === '')
+    {
+        input.style.width = '0px';
+        input.style.borderBottom = '';
+    }
     searchInput();
     // populateTable(jsonData);
 });
@@ -293,6 +335,42 @@ input.addEventListener('input', () => {
 //     // populateTable(jsonData);
 // });
 // // ---------------------------------------------
+function isValid(first, last, phone, email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(email);
+    const isPhoneValidd = isPhoneValid(phone);
+    // console.log('phone', isPhoneValidd);
+    if (first === '' || last ==='' || email === '' || phone === '') {
+        console.log("here");
+        document.getElementById('invalidMessage').textContent = 'Please fill out all fields.';
+        return false;
+    }
+    else if (!isEmailValid) {
+        // console.log('here', isEmailValid, email);
+        document.getElementById('invalidMessage').textContent = 'Invalid email address. Please enter a valid email.';        
+        return false;
+    }
+    else {
+        // console.log('here', isEmailValid, email);
+        // document.getElementById('invalidMessage').textContent = 'Invalid email address. Please enter a valid email.';        
+        return isPhoneValidd;
+    }
+}
 
+function isPhoneValid(phone) {
+    const numericPhone = deFormatPhone(phone);
+    const phoneRegex = /^\d{10}$/;
+    const isPhoneValid = phoneRegex.test(numericPhone);
+    if (isPhoneValid) {
+        return true;
+    } else {
+        document.getElementById('invalidMessage').textContent = 'Invalid phone. Please enter a valid phone number.';        
+        return false;
+    }
+}
+function deFormatPhone(number) {
+    const numericPhone = number.replace(/\D/g, '');
+    return numericPhone;
+}
 
 //export { populateTable };

@@ -42,6 +42,11 @@
 #login.dropdown-item, #loginC.dropdown-item {
     padding-left: 15px !important;
 }
+.dropdown-menu.dropdown-menu-right-custom {
+    right: 0;
+    left: auto;
+}
+
 #loginC:hover {
     color: pink;
 }

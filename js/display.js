@@ -157,6 +157,7 @@ saveButton.addEventListener('click', function (event) {
         updateContact(editedContact);
         searchInput();
         
+        
         //const index = jsonData.findIndex(item => item.contact_id == editContactId);
         //console.log('index: ', index);
 
@@ -174,6 +175,7 @@ saveButton.addEventListener('click', function (event) {
 
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = ''; // Clear the table
+        return;
     }
 
         // TODO: if input_correct

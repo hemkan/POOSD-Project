@@ -43,16 +43,23 @@ if(!isset($_SESSION['user']))
                 border-radius: 45%;
                 background-color: pink;
             }
-            #search-bar-input {
+            #search-bar-input, #search-bar-input-stacked {
                 width: 0;
                 border: none;
-                
+                display: inline-block;
+                vertical-align: middle;
                 outline: none;
                 transition: width 0.3s;
             }
-            #search-bar-container:hover #search-bar-input {
-                width: 150px;
-                border-bottom: 1px solid #ccc;
+            #search-bar-input-stacked {
+                display: none;
+                width: 0;
+                border: 1px solid #ccc;
+                padding: 5px 5px;
+                margin-bottom: 10px;
+                /* margin-top: 10px; */
+                transition: width 0.3s;
+                border-radius: 10px;
             }
             #create:hover, #close:hover {
                 transform: scale(1.1);
@@ -63,7 +70,7 @@ if(!isset($_SESSION['user']))
             #login:hover {
                 color: pink;
             }
-            #loginC {
+            #loginC, #logout {
                 color: #2a2e34;
             }
             #loginC:hover {
@@ -115,30 +122,59 @@ if(!isset($_SESSION['user']))
                     width: 100%;
                 }
             }
-            /* @media (max-width: 425px) {
-                
-                #search-bar-input {
-                    width: 150px;
-                    border-bottom: 1px solid #ccc;
-                    display: inline-block;
-                }
+            .dropdown_S {
+                display: none;
+            }
 
-                #search-bar-container {
-                    position: relative;
-                    display: inline-block; 
+            @media screen and (max-width: 600px) {
+                .table-responsive .table {
+                    width: 100%;
                 }
-
-                #search-icon {
-                    position: absolute; 
-                    top: 0;
-                    left: 0;
+                .table-responsive th, .table-responsive td {
+                    display: block;
+                    width: 100%;
+                    text-align: left;
                 }
+                .table-responsive th {
+                    background-color: #f2f2f2;
+                    display: none;
+                }
+                .name {
+                    background-color: rgb(56, 56, 56);
+                    color: white;
+                }
+                .name-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                .dropdown_S {
+                    margin-left: 10px;
+                    cursor: pointer;
+                    display: block;
+                }
+                .dropdown {
+                    display: none;
+                }
+            }
+            .dropdown_L {
+                position: relative;
+                display: inline-block;
+            }
 
-                #search-icon:hover #search-bar-input {
-                    width: 150px;
-                    border-bottom: 1px solid #ccc;
-                    display: inline-block;
-                }*/
+            #logout-dropdown {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #logout:hover + #logout-dropdown {
+                display: block;
+            }
         </style> 
         <!-- <script type="module" src="../js/search.js"></script> -->
         
@@ -147,10 +183,13 @@ if(!isset($_SESSION['user']))
     <body>
         <header>
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="#"><img src="../images/logo.png" alt="Home" width="50px"></a>
-
-                <a href="/api/logout.php" id="login" class="btn ml-auto">Logout</a>
-
+                <a class="navbar-brand" href="#"><img src="logo.png" alt="Home" width="50px"></a>
+                <div class="dropdown_L">
+                    <a href="#" id="logout" class="btn ml-auto" data-toggle="dropdown_L">Name</a>
+                    <div id="logout-dropdown" class="dropdown-menu" aria-labelledby="logout">
+                        <a class="dropdown-item" id="login" href="#">Logout</a>
+                    </div>
+                </div>
             </nav>
         </header>
         <div class="container mt-3">
@@ -188,17 +227,20 @@ if(!isset($_SESSION['user']))
                                 </div>
                                 <div>
                                     <small id="invalidMessage" style="display: none;">Signup failed. Please try again.</small>
-                                <br>
+                                <!-- <br> -->
                                 </div>
                                 <center><button class="text-center btn" id="createBtn" type="submit">Save</button></center>
                             </form>
                         </div>
                     </div>
                     <span id="search-bar-container">
-                        <button class="icon"><i class="fa-solid fa-search"></i></button>
+                        <button class="icon" id="search-icon"><i class="fa-solid fa-search"></i></button>
                         <input id="search-bar-input" type="text" placeholder="Search">
                     </span>
                 </div>
+            </div>
+            <div class="row-auto">
+                <input id="search-bar-input-stacked" type="text" placeholder="Search">
             </div>
             <div class="table-responsive">
                 <table class="table">

@@ -19,13 +19,56 @@ function populateTable(data) {
 
 function createTableRow(item) {
     const row = document.createElement('tr');
+    
     const nameCell = document.createElement('td');
+    nameCell.classList.add('name'); // Add a class for styling
+    
+    const nameDiv = document.createElement('div');
+    nameDiv.classList.add('name-container');
+
+    const stacked = document.createElement('div');
+
+    const stackedDrop = document.createElement('button');
+    stackedDrop.classList.add('dropdown_S');
+    stackedDrop.classList.add('icon');
+    stackedDrop.type = 'button';
+    stackedDrop.dataset.toggle = 'dropdown';
+    stackedDrop.innerHTML = '<i class="fa-solid fa-ellipsis"></i>';
+
+    const dropdownMenuDiv = document.createElement('div');
+    dropdownMenuDiv.classList.add('dropdown-menu');
+    dropdownMenuDiv.setAttribute('aria-labelledby', 'more');
+
+    const editLink = document.createElement('a');
+    editLink.classList.add('dropdown-item');
+    editLink.href = '#';
+    editLink.textContent = 'Edit';
+    editLink.addEventListener('click', editEventHandler(item));
+
+    const deleteLink = document.createElement('a');
+    deleteLink.classList.add('dropdown-item');
+    deleteLink.href = '#';
+    deleteLink.textContent = 'Delete';
+    deleteLink.addEventListener('click', () => deleteEventHandler(item));
+
+    dropdownMenuDiv.appendChild(editLink);
+    dropdownMenuDiv.appendChild(deleteLink);
+
+    stacked.appendChild(stackedDrop);
+    stacked.appendChild(dropdownMenuDiv);
+
+    const nameText = document.createTextNode(item.first_name + ' ' + item.last_name);
+
+    nameDiv.appendChild(nameText);
+    nameDiv.appendChild(stacked);
+    nameCell.appendChild(nameDiv);
+
     const emailCell = document.createElement('td');
     const phoneCell = document.createElement('td');
     const timeCell = document.createElement('td');
     const opsCell = document.createElement('td');
 
-    nameCell.textContent = item.first_name + ' ' + item.last_name;
+    // nameCell.textContent = item.first_name + ' ' + item.last_name;
     emailCell.textContent = item.email;
     phoneCell.textContent = formatPhoneN(item.phone);
     console.log('itemdata: ', item.date);
@@ -192,7 +235,8 @@ saveButton.addEventListener('click', async function (event) {
         
 
                     const overlay = document.querySelector('.overlay');
-                    overlay.style.display = 'none';
+                    // overlay.style.display = 'none';
+                    hideOverlay(overlay);
                     saveButton.dataset.editContactId = '';
             
                     const tableBody = document.getElementById('table-body');
@@ -410,6 +454,51 @@ input.addEventListener('input', () => {
     searchInput();
     // populateTable(jsonData);
 });
+
+function handleScreenWidthChange() {
+    var screenWidth = window.innerWidth;
+    const search_bar = document.getElementById('search-bar-input-stacked');
+    const input = document.getElementById('search-bar-input');
+    
+    if (screenWidth <= 425) {
+        if (input.value !== '') {
+            search_bar.value = input.value;
+            search_bar.style.display = 'block';
+            search_bar.style.width = '100%';
+            search_bar.focus();
+        }
+        input.style.display = 'none';
+
+        const searchIcon = document.getElementById('search-icon');
+        searchIcon.addEventListener('click', function () {
+            if (search_bar.style.display === 'block') {
+                search_bar.style.display = 'none';
+                return;
+            }
+            else if(search_bar.style.display === 'none') {
+                search_bar.style.display = 'block';
+            }
+            search_bar.style.display = 'block';
+            search_bar.style.width = '100%';
+            search_bar.focus();
+        });
+    } else {
+        search_bar.style.display = 'none';
+
+        if (search_bar.value !== '') {
+            // console.log('here');
+            document.getElementById('search-bar-input').style.display = 'inline-block';
+            document.getElementById('search-bar-input').value = search_bar.value;
+            document.getElementById('search-bar-input').style.width = '150px';
+            document.getElementById('search-bar-input').style.borderBottom = '1px solid #ccc';
+            document.getElementById('search-bar-input').focus();
+            return;
+        }
+    }
+}
+handleScreenWidthChange();
+  
+window.addEventListener("resize", handleScreenWidthChange);
 // ---------------------------------------------
 
 // // -------------input in search bar-------------

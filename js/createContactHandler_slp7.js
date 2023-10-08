@@ -1,50 +1,44 @@
 // createContactHandler_slp7.js
 
-function createContact(newContactData){
+function createContact(newContactData, callback)
+{
 
+    event.preventDefault('')
     let url = '/api/CreateContactController_slp7.php';
-    console.log(JSON.stringify(newContactData));
 
-    fetch(url, 
-        {
-            method: 'POST',
-            headers: 
-            {
-                'Content-Type': 'application/json'
-            },
+    var xhr = new XMLHttpRequest();
 
-            body: JSON.stringify(newContactData)
-        })
-        .then(respose =>
-        {
-            if (respose.ok)
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function ()
+    {
+        if (xhr.readyState === 4){
+            if(xhr.status === 200)
             {
-                console.log('response ok');
-                return respose.json();
+              //  console.log('response text: ', xhr.responseText);
+                var data = JSON.parse(xhr.responseText);
+                if(data === 'Contact added successfully') {
+                   // console.log('contact successfully added');
+                    callback(1);
+                }else
+                {
+                    alert('contact add error');
+                }
             }else
             {
-                throw new Error('Network response was not ok');
+                var errorData = JSON.parse(xhr.responseText);
+                if (xhr.status === 400) 
+                {
+                    console.log('400 response text: ', xhr.responseText);
+                    callback (JSON.parse(xhr.responseText));
+                }else
+                {
+                    alert('HTTP ERROR: ', xhr.status);
+                }
             }
-        })
-        .then(data =>
-        {
-            if(data.success) 
-            {
-                console.log('data success');
+        }
+    }
 
-                alert(data.success);
-
-                //updateSearchResults('/0'); // update contact list with new contact
-
-            }
-            else if (data.error)
-            {
-                console.log('data error');
-                alert(data.error);
-            }
-        })
-        .catch(error =>
-        {
-            console.error('An error has occurred while adding the contact.');
-        })
+    xhr.send(JSON.stringify(newContactData));
 }

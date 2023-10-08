@@ -4,6 +4,7 @@
 //     { contact_id: 1, "first_name": "John", "last_name": "Doe", "email": "john@example.com", "phone": "1234567890", "date": new Date(2023, 0, 1, 12, 30)},
 //     { contact_id: 2, "first_name": "Jane", "last_name": "Smith", "email": "jane@example.com", "phone": "9876543210", "date": new Date(2023, 0, 2, 14, 15)},
 // ];
+
 function populateTable(data) {
     // const tableBody = document.getElementById('table-body');
     const tableBody = document.getElementById('table-body');
@@ -27,6 +28,7 @@ function createTableRow(item) {
     nameCell.textContent = item.first_name + ' ' + item.last_name;
     emailCell.textContent = item.email;
     phoneCell.textContent = formatPhoneN(item.phone);
+    console.log('itemdata: ', item.date);
     timeCell.textContent = formatTime(item.date);
     // let format4 = 
     // console.log(format4); // 23-7-2022
@@ -46,8 +48,13 @@ function formatPhoneN(number) {
 }
 
 function formatTime(time) {
-    const [year, month, day] = time.split('-');
-    return (month + '/' + day + '/' + year);
+    if (typeof time === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(time)) {
+        const [year, month, day] = time.split('-');
+        return (month + '/' + day + '/' + year);
+    } else {
+        console.log('time: ',time);
+        return 'Invalid Date';
+    }
 }
 
 function createDropdownMenu(item) {
@@ -116,9 +123,15 @@ createButton.addEventListener('click', () => {
 
 // ------------------------------------------
 
+const chevron = document.querySelector('.fa-solid.fa-chevron-left');
+chevron.addEventListener('click', ()=>
+{
+    document.getElementById('invalidMessage').style.display = 'none';
+})
+
 // --------create/edit save-----------------------
 const saveButton = document.getElementById('createBtn');
-saveButton.addEventListener('click', function (event) {
+saveButton.addEventListener('click', async function (event) {
     event.preventDefault(); // Prevent the default form submission behavior
     
     // get values from the input fields
@@ -128,7 +141,7 @@ saveButton.addEventListener('click', function (event) {
     const email = document.getElementById('email_inp').value;
     const time = new Date();
 
-    // check if valid info
+    //check if valid info
     if (!isValid(firstName, lastName, phone, email)) {
         document.getElementById('invalidMessage').style.display = 'block';
         return;
@@ -145,50 +158,58 @@ saveButton.addEventListener('click', function (event) {
             "new_phone": deFormatPhone(phone),
             //"date": time,
         };
-        // let ifCreated = updateContact(editedContact);
-        // if (ifCreated)
-        // {
-        //     if (ifCreated === 1) {
-        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
-        //         document.getElementById('invalidMessage').style.display = 'block';
-        //     } else if (ifCreated === 2) {
-        //         document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
-        //         document.getElementById('invalidMessage').style.display = 'block';
-        //     }
-        // }
-     
+
+        updateContact(editedContact, function(result) {
+            console.log('reuslt', result);
+            if (result) {
+                console.log('result: ', result);
+                if (result === 2) {
+                    console.log('display update: duplicate email')
+                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+                    document.getElementById('invalidMessage').style.display = 'block';
+                    return;
+                    
+                } else if (result === 1) {
+                    console.log('display update: duplicate phone')
+
+                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+                    document.getElementById('invalidMessage').style.display = 'block';
+                    return;
+                    
+                } else if (result === 3) {
+                    console.log('display update: duplicate both')
+
+                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email and phone number.';
+                    document.getElementById('invalidMessage').style.display = 'block';
+                    return
+                    
+                }else if (result === 4){
+                    searchInput();
+        
+        
+                    
+                    saveButton.dataset.editContactId = '';
         
 
-        updateContact(editedContact);
-        searchInput();
-        
-        
-        //const index = jsonData.findIndex(item => item.contact_id == editContactId);
-        //console.log('index: ', index);
+                    const overlay = document.querySelector('.overlay');
+                    overlay.style.display = 'none';
+                    saveButton.dataset.editContactId = '';
+            
+                    const tableBody = document.getElementById('table-body');
+                    tableBody.innerHTML = ''; // Clear the table
 
-        //  if (index !== -1) {
-        //      jsonData[index] = editedContact;
-        //      // api 
-        //  }
+                }
+            }
+                    document.getElementById('first').value = '';
+                    document.getElementById('last').value = '';
+                    document.getElementById('phone_inp').value = '';
+                    document.getElementById('email_inp').value = '';
+                    document.getElementById('invalidMessage').style.display = 'none';
+        });      
 
-        // reset save button
-        saveButton.dataset.editContactId = '';
-        
-        const overlay = document.querySelector('.overlay');
-        // overlay.style.display = 'none';
-        hideOverlay(overlay);
-        saveButton.dataset.editContactId = '';
-
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = ''; // Clear the table
-
-        // populateTable(jsonData);
-        document.getElementById('first').value = '';
-        document.getElementById('last').value = '';
-        document.getElementById('phone_inp').value = '';
-        document.getElementById('email_inp').value = '';
       
         return;
+        
     }
 
         // TODO: if input_correct
@@ -199,11 +220,70 @@ saveButton.addEventListener('click', function (event) {
              "last_name": lastName,
              "email": email,
              "phone": deFormatPhone(phone),
-             //"data": new Date(), date is recorded on backend 
          };
      // }
      // add the new contact to the array we print from = api
-        createContact(newContact);
+        createContact(newContact, function(result){
+            if (result)
+            {
+                if(result === 1)
+                {
+                    //success
+                    document.getElementById('first').value = '';
+                    document.getElementById('last').value = '';
+                    document.getElementById('phone_inp').value = '';
+                    document.getElementById('email_inp').value = '';
+
+                    // close the overlay
+                    const overlay = document.querySelector('.overlay');
+                    overlay.style.display = 'none';
+
+                    // Calling empty search method repopulates the table.
+                    searchInput();
+
+                }else
+                {
+                    console.log('else case: result: ', result);
+                    // info is missing
+                    document.getElementById('invalidMessage').innerHTML = result;
+                    document.getElementById('invalidMessage').style.display = 'block';
+                    return;
+                    
+
+                 } }//else if (result === 3)
+            //     {
+            //         // email wrong format
+            //         document.getElementById('invalidMessage').textContent = 'Invalid Email. Please enter a valid phone number.';
+            //         document.getElementById('invalidMessage').style.display = 'block';
+            //         return;
+                    
+
+            //     }else if (result === 4)
+            //     {
+            //         // phone number wrong format
+            //         document.getElementById('invalidMessage').textContent = 'Invalid phone number. Please enter a valid phone number.';
+            //         document.getElementById('invalidMessage').style.display = 'block';
+            //         return;
+                    
+
+            //     }else if (reslut === 5)
+            //     {
+            //         // duplicate pone and email
+
+            //     }else if (result === 6)
+            //     {
+            //         // same phone                    
+
+            //     }else if (result === 7)
+            //     {
+            //         // same email
+            //     }else if (result === 8)
+            //     {
+            //         // invalid phone and 
+            //     }
+            // }
+        });
+        return;
         // let ifCreated = createContact(newContact);
         // if (ifCreated)
         // {
@@ -227,10 +307,9 @@ saveButton.addEventListener('click', function (event) {
     // overlay.style.display = 'none';
     hideOverlay(overlay);
 
-    // add to the table
-    const newRow = createTableRow(newContact);
-    const tableBody = document.getElementById('table-body');
-    tableBody.appendChild(newRow);
+    // Calling empty search method repopulates the table.
+    searchInput();
+
 });
 // -------------------------------------------
 

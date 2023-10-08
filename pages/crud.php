@@ -171,6 +171,10 @@ if(!isset($_SESSION['user']))
             .dropdown_L2 .btn::after {
                 display: none;
             }
+            .dropdown-menu.dropdown-menu-right-custom {
+                right: 0;
+                left: auto;
+            }
         </style> 
         <!-- <script type="module" src="../js/search.js"></script> -->
         
@@ -183,7 +187,7 @@ if(!isset($_SESSION['user']))
                 <div class="dropdown_L ml-auto">
                     <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                     <a href="#" id="logout" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
-                    <div class="dropdown-menu" aria-labelledby="logout">
+                    <div class="dropdown-menu dropdown-menu-right-custom" aria-labelledby="logout">
                         <!-- <a class="dropdown-item" id="login" href="#">Logout</a> -->
                         <a href="/api/logout.php" id="login" class="dropdown-item">Logout</a>
 
@@ -204,7 +208,7 @@ if(!isset($_SESSION['user']))
                             <div class="dropdown_L2 ml-auto">
                                 <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                                 <a href="#" id="logoutC" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
-                                <div class="dropdown-menu" aria-labelledby="logoutC">
+                                <div class="dropdown-menu dropdown-menu-right-custom" aria-labelledby="logoutC">
                                     <a class="dropdown-item" id="loginC" href="/api/logout.php">Logout</a>
                                 </div>
                             </div>

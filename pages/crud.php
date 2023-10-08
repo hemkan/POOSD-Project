@@ -32,9 +32,7 @@ if(!isset($_SESSION['user']))
         <link rel="stylesheet" href="">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/crud_styles.css">
-        <script src="https://kit.fontawesome.com/5d8ee741cc.js" crossorigin="anonymous"></script>
-        <!-- <script type="module" src="../js/search.js"></script> -->
-        
+        <script src="https://kit.fontawesome.com/5d8ee741cc.js" crossorigin="anonymous"></script>        
 
     </head>
     <body>
@@ -44,7 +42,7 @@ if(!isset($_SESSION['user']))
                 <div class="dropdown_L ml-auto">
                     <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                     <a href="#" id="logout" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
-                    <div class="dropdown-menu" aria-labelledby="logout">
+                    <div class="dropdown-menu dropdown-menu-right-custom" aria-labelledby="logout">
                         <!-- <a class="dropdown-item" id="login" href="#">Logout</a> -->
                         <a href="/api/logout.php" id="login" class="dropdown-item">Logout</a>
 
@@ -65,7 +63,7 @@ if(!isset($_SESSION['user']))
                             <div class="dropdown_L2 ml-auto">
                                 <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                                 <a href="#" id="logoutC" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
-                                <div class="dropdown-menu" aria-labelledby="logoutC">
+                                <div class="dropdown-menu dropdown-menu-right-custom" aria-labelledby="logoutC">
                                     <a class="dropdown-item" id="loginC" href="/api/logout.php">Logout</a>
                                 </div>
                             </div>

@@ -99,6 +99,9 @@ if(!isset($_SESSION['user']))
             #ECForm {
                 width: 60vh;
             }
+            .navOverlay {
+                margin-top: 11px;
+            }
             @media (max-width: 450px) {
                 .createBtn {
                     width: 100%;
@@ -111,7 +114,32 @@ if(!isset($_SESSION['user']))
                 .form-control {
                     width: 100%;
                 }
-        </style>
+            }
+            /* @media (max-width: 425px) {
+                
+                #search-bar-input {
+                    width: 150px;
+                    border-bottom: 1px solid #ccc;
+                    display: inline-block;
+                }
+
+                #search-bar-container {
+                    position: relative;
+                    display: inline-block; 
+                }
+
+                #search-icon {
+                    position: absolute; 
+                    top: 0;
+                    left: 0;
+                }
+
+                #search-icon:hover #search-bar-input {
+                    width: 150px;
+                    border-bottom: 1px solid #ccc;
+                    display: inline-block;
+                }*/
+        </style> 
         <!-- <script type="module" src="../js/search.js"></script> -->
         
 
@@ -132,8 +160,8 @@ if(!isset($_SESSION['user']))
                 </div>
                 <div class="col-auto">
                     <button id="create" class="icon"><i class="fa-solid fa-plus"></i></button>
-                    <div class="overlay">
-                        <nav class="navbar navbar-expand-lg">
+                    <div class="overlay" style="opacity: 0;">
+                        <nav class="navbar navbar-expand-lg navOverlay">
                             <a class="" id="close"><i class="fa-solid fa-chevron-left"></i></a>
                             <a href="../index.html" id="loginC" class="btn ml-auto">Logout</a>
                         </nav>

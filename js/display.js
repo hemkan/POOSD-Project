@@ -116,8 +116,11 @@ createButton.addEventListener('click', () => {
     head.textContent = 'Create Contact';
 
     // Show the overlay and modal
-    overlay.style.display = 'block';
+    showOverlay(overlay);
+    // overlay.style.display = 'block';
 });
+
+
 // ------------------------------------------
 
 const chevron = document.querySelector('.fa-solid.fa-chevron-left');
@@ -187,6 +190,7 @@ saveButton.addEventListener('click', async function (event) {
                     
                     saveButton.dataset.editContactId = '';
         
+
                     const overlay = document.querySelector('.overlay');
                     overlay.style.display = 'none';
                     saveButton.dataset.editContactId = '';
@@ -202,6 +206,7 @@ saveButton.addEventListener('click', async function (event) {
                     document.getElementById('email_inp').value = '';
                     document.getElementById('invalidMessage').style.display = 'none';
         });      
+
       
         return;
         
@@ -299,7 +304,8 @@ saveButton.addEventListener('click', async function (event) {
 
     // close the overlay
     const overlay = document.querySelector('.overlay');
-    overlay.style.display = 'none';
+    // overlay.style.display = 'none';
+    hideOverlay(overlay);
 
     // Calling empty search method repopulates the table.
     searchInput();
@@ -319,7 +325,8 @@ function editEventHandler(data) {
 
 function editOverlay(data) {
     const overlay = document.querySelector('.overlay');
-    overlay.style.display = 'block';
+    // overlay.style.display = 'block';
+    showOverlay(overlay);
     const head = document.getElementById('heading');
     head.textContent = 'Edit Contact';
 
@@ -369,7 +376,8 @@ deleteConfirmed.addEventListener('click', function() {
 // ------------close---------------------------
 const close = document.getElementById('close');
 close.addEventListener('click', function() {
-    overlay.style.display = 'none';
+    // overlay.style.display = 'none';
+    hideOverlay(overlay);
     document.getElementById('first').value = '';
     document.getElementById('last').value = '';
     document.getElementById('phone_inp').value = '';
@@ -449,6 +457,23 @@ function isPhoneValid(phone) {
 function deFormatPhone(number) {
     const numericPhone = number.replace(/\D/g, '');
     return numericPhone;
+}
+
+function showOverlay(overlay) {
+    // overlay.style.display = 'flex';
+    overlay.style.pointerEvents = "auto";
+    setTimeout(function() {
+        overlay.style.opacity = "1"; // Fade it in
+    }, 10);
+    overlay.style.display = "block"; // Show the overlay
+}
+function hideOverlay(overlay) {
+    overlay.style.pointerEvents = "none";
+    // overlay.style.display = 'none';
+    overlay.style.opacity = "0"; // Fade it out
+    setTimeout(function() {
+        overlay.style.display = "none"; // Hide the overlay
+    }, 300); // Wait for the transition to complete
 }
 
 //export { populateTable };

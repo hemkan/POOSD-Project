@@ -162,6 +162,7 @@ saveButton.addEventListener('click', function (event) {
         updateContact(editedContact);
         searchInput();
         
+        
         //const index = jsonData.findIndex(item => item.contact_id == editContactId);
         //console.log('index: ', index);
 
@@ -180,11 +181,13 @@ saveButton.addEventListener('click', function (event) {
 
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = ''; // Clear the table
+
         // populateTable(jsonData);
         document.getElementById('first').value = '';
         document.getElementById('last').value = '';
         document.getElementById('phone_inp').value = '';
         document.getElementById('email_inp').value = '';
+      
         return;
     }
 

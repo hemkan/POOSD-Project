@@ -70,6 +70,10 @@ if(!isset($_SESSION['user']))
             #logout:hover, #logoutC:hover {
                 color: pink;
             }
+            #loginC, #logout {
+                color: #2a2e34;
+                /* padding-left: 0px !important; */
+            }
             #login.dropdown-item, #loginC.dropdown-item {
                 padding-left: 15px !important;
             }

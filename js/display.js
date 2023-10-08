@@ -433,16 +433,29 @@ close.addEventListener('click', function() {
 // -------------input in search bar-------------
 const input = document.getElementById('search-bar-input');
 const inputC = document.getElementById('search-bar-container');
+const searchIcon = document.getElementById('search-icon');
+const search_bar = document.getElementById('search-bar-input-stacked');
+
 inputC.addEventListener('mouseenter', () => {
-    input.focus();
-    input.style.width = '150px';
-    input.style.borderBottom = '1px solid #ccc';
+    if (window.innerWidth <= 425) {
+        searchIcon.style.transform = 'scale(1.1)';
+    }
+    else {
+        input.focus();
+        input.style.width = '150px';
+        input.style.borderBottom = '1px solid #ccc';
+    }
 });
 inputC.addEventListener('mouseleave', () => {
-    if (document.getElementById('search-bar-input').value === '')
-    {
-        input.style.width = '0px';
-        input.style.borderBottom = '';
+    if (window.innerWidth <= 425) {
+        searchIcon.style.removeProperty('transform');
+    }
+    else {
+        if (document.getElementById('search-bar-input').value === '')
+        {
+            input.style.width = '0px';
+            input.style.borderBottom = '';
+        }
     }
 });
 input.addEventListener('input', () => {
@@ -453,6 +466,30 @@ input.addEventListener('input', () => {
     }
     searchInput();
     // populateTable(jsonData);
+});
+searchIcon.addEventListener('click', function () {
+    if (window.innerWidth <= 425) {
+        if (search_bar.style.display === 'block') {
+            
+            // search_bar.style.display = 'none';
+            search_bar.style.width = '0'; // Shrink width smoothly
+            setTimeout(() => {
+                search_bar.style.display = 'none';
+            }, 300);
+            search_bar.value = '';
+            input.value = '';
+            searchInput();
+
+            return;
+        }
+        else {
+            search_bar.style.display = 'block';
+            setTimeout(() => {
+                search_bar.style.width = '100%'; // Set width to 100% after displaying
+                search_bar.focus();
+            }, 0); // Delay for reflow before transitioning
+        }    
+    }
 });
 
 function handleScreenWidthChange() {
@@ -469,44 +506,17 @@ function handleScreenWidthChange() {
         }
         input.style.display = 'none';
 
-        const searchIcon = document.getElementById('search-icon');
-
-        searchIcon.addEventListener('mouseenter', function () {
-            searchIcon.style.transform = 'scale(1.1)';
-        });
-
-        searchIcon.addEventListener('mouseleave', function () {
-            searchIcon.style.removeProperty('transform');
-        });
-
-
-        searchIcon.addEventListener('click', function () {
-            if (search_bar.style.display === 'block') {
-                // search_bar.style.display = 'none';
-                search_bar.style.width = '0'; // Shrink width smoothly
-                setTimeout(() => {
-                    search_bar.style.display = 'none';
-                }, 300);
-                return;
-            }
-            else {
-                search_bar.style.display = 'block';
-                setTimeout(() => {
-                    search_bar.style.width = '100%'; // Set width to 100% after displaying
-                    search_bar.focus();
-                }, 0); // Delay for reflow before transitioning
-            }    
-        });
+        
     } else {
         search_bar.style.display = 'none';
-        document.getElementById('search-bar-input').style.display = 'inline-block';
+        input.style.display = 'inline-block';
 
         if (search_bar.value !== '') {
             // console.log('here');
-            document.getElementById('search-bar-input').value = search_bar.value;
-            document.getElementById('search-bar-input').style.width = '150px';
-            document.getElementById('search-bar-input').style.borderBottom = '1px solid #ccc';
-            document.getElementById('search-bar-input').focus();
+            input.value = search_bar.value;
+            input.style.width = '150px';
+            input.style.borderBottom = '1px solid #ccc';
+            input.focus();
             return;
         }
     }
@@ -515,9 +525,11 @@ handleScreenWidthChange();
   
 window.addEventListener("resize", handleScreenWidthChange);
 // ---------------------------------------------
-const nameL = document.getElementById('logut');
+const nameL = document.getElementById('logout');
+const name_2 = document.getElementById('logoutC');
 document.addEventListener("DOMContentLoaded", (event) => {
     nameL.textContent = getUserName();
+    name_2.textContent = nameL.textContent;
 });
 
 function getUserName () {

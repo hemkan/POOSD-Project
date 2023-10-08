@@ -65,17 +65,17 @@ class DuplicateChecker
         if($phoneFlag){
             if($emailFlag){
                 // both found in database
-                return ['error' => 'Contact exist with same phone number and email.'];
+                return ['error' => 'A contact with the entered email and phone number already exists.'];
             }
            
             error_log('Contact exist with same phone number.');
-            return ['error'=> 'Contact exist with same phone number.'];
+            return ['error'=> 'A contact with the same phone number already exists.'];
             
             
         }else if ($emailFlag) {
             
             error_log('Contact exist with same email.');
-            return ['error'=> 'Contact exist with same email.'];
+            return ['error'=> 'A contact with the same email already exists.'];
 
             
         }

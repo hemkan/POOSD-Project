@@ -28,9 +28,10 @@ function createContact(newContactData, callback)
             }else
             {
                 var errorData = JSON.parse(xhr.responseText);
-                if (xhr.status === 400) 
+                //console.log('400 response text: ', xhr.responseText);
+                if (xhr.status >= 400) 
                 {
-                    console.log('400 response text: ', xhr.responseText);
+                   // console.log('400 response text: ', xhr.responseText);
                     callback (JSON.parse(xhr.responseText));
                 }else
                 {

@@ -1,13 +1,16 @@
 <?php
 // editContact.php
 require_once('../config/database.php');
+
+
+require_once('checkForDupe.php');
 session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: ../index.html');
     exit;
 } else {
-    error_log('session_data from a_read page: ' . print_R($_SESSION['user'], true));
+    error_log('session_data from edit contact page: ' . print_R($_SESSION['user'], true));
 }
 $access_id = $_SESSION['user']['user_id'];
 
@@ -22,7 +25,7 @@ class UpdateContact
 
     public function updateContact($postData)
     {
-        error_log('$postData in function: ' . print_r($postData, true));
+        //error_log('$postData in function: ' . print_r($postData, true));
 
         $access_id = $GLOBALS['access_id'];
         $contact_id = $postData['contact_id'];
@@ -31,6 +34,20 @@ class UpdateContact
         $new_email = $postData['new_email'];
         $new_phone = $postData['new_phone'];
 
+
+        // check if another contact_id mathces the phone or email
+        $pdo = createPDO();
+        $checker = new DuplicateChecker($pdo);
+        $result = $checker->checkForDuplicateContacts($access_id, $contact_id, $new_email, $new_phone);
+
+        
+        if(isset($result['error'])){
+            http_response_code(409);
+            return $result;
+        }
+        
+
+
         // Construct SQL query with placeholders
         $sql = "UPDATE contacts 
                 SET first_name = :first_name, 
@@ -38,8 +55,6 @@ class UpdateContact
                     email = :email, 
                     phone = :phone 
                 WHERE access_id = :access_id AND contact_id = :contact_id";
-
-        error_log('SQL Query: ' . $sql);
 
         // Prepare statement
         $statement = $this->pdo->prepare($sql);

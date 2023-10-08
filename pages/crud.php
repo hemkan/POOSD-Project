@@ -49,7 +49,7 @@ if(!isset($_SESSION['user']))
                 display: inline-block;
                 vertical-align: middle;
                 outline: none;
-                transition: width 0.3s;
+                transition: width 0.3s ease;
             }
             #search-bar-input-stacked {
                 display: none;
@@ -64,14 +64,14 @@ if(!isset($_SESSION['user']))
             #create:hover, #close:hover {
                 transform: scale(1.1);
             }
-            #login {
+            #logout, #logoutC {
                 color: #2a2e34;
             }
-            #login:hover {
+            #logout:hover, #logoutC:hover {
                 color: pink;
             }
-            #loginC, #logout {
-                color: #2a2e34;
+            #login.dropdown-item, #loginC.dropdown-item {
+                padding-left: 15px !important;
             }
             #loginC:hover {
                 color: pink;
@@ -157,23 +157,15 @@ if(!isset($_SESSION['user']))
                     display: none;
                 }
             }
-            .dropdown_L {
+            .dropdown_L, .dropdown_L2 {
                 position: relative;
                 display: inline-block;
             }
-
-            #logout-dropdown {
+            .dropdown_L .btn::after {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background-color: #fff;
-                border: 1px solid #ccc;
-                border-radius: 4px;
             }
-
-            #logout:hover + #logout-dropdown {
-                display: block;
+            .dropdown_L2 .btn::after {
+                display: none;
             }
         </style> 
         <!-- <script type="module" src="../js/search.js"></script> -->
@@ -185,9 +177,12 @@ if(!isset($_SESSION['user']))
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"><img src="logo.png" alt="Home" width="50px"></a>
                 <div class="dropdown_L">
-                    <a href="#" id="logout" class="btn ml-auto" data-toggle="dropdown_L">Name</a>
-                    <div id="logout-dropdown" class="dropdown-menu" aria-labelledby="logout">
-                        <a class="dropdown-item" id="login" href="#">Logout</a>
+                    <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
+                    <a href="#" id="logout" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
+                    <div class="dropdown-menu" aria-labelledby="logout">
+                        <!-- <a class="dropdown-item" id="login" href="#">Logout</a> -->
+                        <a href="/api/logout.php" id="login" class="dropdown-item">Logout</a>
+
                     </div>
                 </div>
             </nav>
@@ -202,7 +197,13 @@ if(!isset($_SESSION['user']))
                     <div class="overlay" style="opacity: 0;">
                         <nav class="navbar navbar-expand-lg navOverlay">
                             <a class="" id="close"><i class="fa-solid fa-chevron-left"></i></a>
-                            <a href="../index.html" id="loginC" class="btn ml-auto">Logout</a>
+                            <div class="dropdown_L2">
+                                <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
+                                <a href="#" id="logoutC" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
+                                <div class="dropdown-menu" aria-labelledby="logoutC">
+                                    <a class="dropdown-item" id="loginC" href="/api/logout.php">Logout</a>
+                                </div>
+                            </div>
                         </nav>
                         <div class="container mt-5">
                         <form class="container mt-5" id="ECForm">

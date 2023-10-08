@@ -470,24 +470,39 @@ function handleScreenWidthChange() {
         input.style.display = 'none';
 
         const searchIcon = document.getElementById('search-icon');
+
+        searchIcon.addEventListener('mouseenter', function () {
+            searchIcon.style.transform = 'scale(1.1)';
+        });
+
+        searchIcon.addEventListener('mouseleave', function () {
+            searchIcon.style.removeProperty('transform');
+        });
+
+
         searchIcon.addEventListener('click', function () {
             if (search_bar.style.display === 'block') {
-                search_bar.style.display = 'none';
+                // search_bar.style.display = 'none';
+                search_bar.style.width = '0'; // Shrink width smoothly
+                setTimeout(() => {
+                    search_bar.style.display = 'none';
+                }, 300);
                 return;
             }
-            else if(search_bar.style.display === 'none') {
+            else {
                 search_bar.style.display = 'block';
-            }
-            search_bar.style.display = 'block';
-            search_bar.style.width = '100%';
-            search_bar.focus();
+                setTimeout(() => {
+                    search_bar.style.width = '100%'; // Set width to 100% after displaying
+                    search_bar.focus();
+                }, 0); // Delay for reflow before transitioning
+            }    
         });
     } else {
         search_bar.style.display = 'none';
+        document.getElementById('search-bar-input').style.display = 'inline-block';
 
         if (search_bar.value !== '') {
             // console.log('here');
-            document.getElementById('search-bar-input').style.display = 'inline-block';
             document.getElementById('search-bar-input').value = search_bar.value;
             document.getElementById('search-bar-input').style.width = '150px';
             document.getElementById('search-bar-input').style.borderBottom = '1px solid #ccc';
@@ -500,6 +515,15 @@ handleScreenWidthChange();
   
 window.addEventListener("resize", handleScreenWidthChange);
 // ---------------------------------------------
+const nameL = document.getElementById('logut');
+document.addEventListener("DOMContentLoaded", (event) => {
+    nameL.textContent = getUserName();
+});
+
+function getUserName () {
+    const users_firstName = "<?php echo $_SESSION['user']['first_name']; ?>";
+    return users_firstName;
+}
 
 // // -------------input in search bar-------------
 // const load = document.querySelector(".table");

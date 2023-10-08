@@ -532,10 +532,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     name_2.textContent = nameL.textContent;
 });
 
-function getUserName () {
-    const users_firstName = "<?php echo $_SESSION['user']['first_name']; ?>";
-    return users_firstName;
-}
+
 
 // // -------------input in search bar-------------
 // const load = document.querySelector(".table");

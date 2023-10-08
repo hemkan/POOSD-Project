@@ -176,7 +176,7 @@ if(!isset($_SESSION['user']))
         <header>
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#"><img src="logo.png" alt="Home" width="50px"></a>
-                <div class="dropdown_L">
+                <div class="dropdown_L ml-auto">
                     <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                     <a href="#" id="logout" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
                     <div class="dropdown-menu" aria-labelledby="logout">
@@ -197,7 +197,7 @@ if(!isset($_SESSION['user']))
                     <div class="overlay" style="opacity: 0;">
                         <nav class="navbar navbar-expand-lg navOverlay">
                             <a class="" id="close"><i class="fa-solid fa-chevron-left"></i></a>
-                            <div class="dropdown_L2">
+                            <div class="dropdown_L2 ml-auto">
                                 <!-- <button class="dropdown-toggle btn ml-auto" type="button" id="logoutC" data-toggle="dropdown_L2" aria-haspopup="true" aria-expanded="false"></button> -->
                                 <a href="#" id="logoutC" class="btn ml-auto dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Name</a>
                                 <div class="dropdown-menu" aria-labelledby="logoutC">

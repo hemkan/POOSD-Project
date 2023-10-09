@@ -2,6 +2,7 @@ const login = document.getElementById('login');
 const overlayL = document.querySelector('.loginOverlay');
 const signup = document.getElementById('signup');
 const overlayS = document.querySelector('.signupOverlay');
+
 // -------------login/signup buttons on welcome----------
 login.addEventListener('click', () => {
     document.getElementById('email_inp').value = '';
@@ -10,33 +11,25 @@ login.addEventListener('click', () => {
     showOverlay(overlayL);
     hideOverlay(overlayS);
 });
+
 const loginBtn = document.getElementById('loginBtn');
-// helps check for basic email addresses
 loginBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const emailInput = document.getElementById('email_inp').value;
     const passwrdInput = document.getElementById('passwrd_inp').value;
+
     // check if all fields filled and if any invalid inputs
     let valid = isValidEmail_P(emailInput, passwrdInput, 'invalidLogin');
     if (valid) {
-        console.log('valid email and passwrd');
-        // if (check if valid login credentials)
         const loginData = {
             email: emailInput,
             password: passwrdInput,
         };
-        console.log('sending: ', loginData);
-        // loginUser(loginData)
-        // loginUser(loginData)
+
         if (!loginUser(loginData))
-        // if(false)
         {
             document.getElementById('invalidLogin').textContent = 'Invalid login credentials. Please try again.';
         }
-        // else {
-        //     console.log('logged in');
-        //     window.location.href = '../pages/crud.php';
-        // }
     }
     else {
         document.getElementById('invalidLogin').style.display = 'block';
@@ -54,6 +47,7 @@ signup.addEventListener('click', () => {
     hideOverlay(overlayL);
 
 });
+
 const signupBtn = document.getElementById('signupBtn');
 signupBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -62,37 +56,23 @@ signupBtn.addEventListener('click', (e) => {
     const phoneN = document.getElementById('phone_inp').value;
     const emailInput = document.getElementById('email_inpS').value;
     const passwrdInput = document.getElementById('passwrd_inpS').value;
-    // console.log(firstName, lastName, phoneN, emailInput, passwrdInput);
     
     document.getElementById('invalidSignup').style.display = 'none';
     // check if valid inputs
-    // authenticate
     let valid = isValid(firstName, lastName, phoneN, emailInput, passwrdInput);
     if (valid) {
         const login = {
-            // "contact_id" :
             first_name: firstName,
             last_name: lastName,
             phone: deFormatPhone(phoneN),
             email: emailInput,
             password: passwrdInput
-            //"date": new Date(),
         };
 
-        // registerUser(login);
-        
-        // if(false)
         if (!registerUser(login)) {
             document.getElementById('invalidLogin').textContent = 'Email is already registered. Please use a different email.';
         }
-        // else {
-        //     console.log('created profile and logged in');
-        //     window.location.href = '../pages/crud.php';
-        // }
     }
-        // ready to send to the backedn
-        // store email and password 
-        // window.location.href = '../pages/crud.php';
     else {
         document.getElementById('invalidSignup').style.display = 'block';
     }
@@ -126,73 +106,63 @@ signup_small.addEventListener('click', () => {
 });
 
 function showOverlay(overlay) {
-    // overlay.style.display = 'flex';
     overlay.style.display = "flex"; // Show the overlay
     setTimeout(function() {
         overlay.style.opacity = "1"; // Fade it in
     }, 10);
 }
+
 function hideOverlay(overlay) {
-    // overlay.style.display = 'none';
     overlay.style.opacity = "0"; // Fade it out
     setTimeout(function() {
         overlay.style.display = "none"; // Hide the overlay
-    }, 300); // Wait for the transition to complete
+    }, 300);
 }
 // ----------------------------------------------------
 
-
-// ------------close---------------------------
+// ------------close/back button -------------
 const closeL = document.getElementById('closeL');
 closeL.addEventListener('click', function() {
     hideOverlay(overlayS);
     hideOverlay(overlayL);
 });
+
 const closeS = document.getElementById('closeS');
 closeS.addEventListener('click', function() {
     hideOverlay(overlayS);
     hideOverlay(overlayL);
 });
-
 // --------------------------------------------
 
-// -------------isValid------------------------
+// -------------isValid functions----------------
 function isValidEmail_P(email, password, id) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isPasswordValid = password.length >= 3;
     const isEmailValid = emailRegex.test(email);
-    console.log(isPasswordValid, isEmailValid);
     if (email === '' || password === '') {
         document.getElementById(id).textContent = 'Please enter your email and password.';
         return false;
     }
     else if (!isEmailValid) {
-        console.log('here', isEmailValid, email);
         document.getElementById(id).textContent = 'Invalid email address. Please enter a valid email.';        
         return false;
     }
     else if (!isPasswordValid) {
-        console.log('here2');
-
         document.getElementById(id).textContent = 'Invalid password. Must be at least 6 characters long.';
         return false;
     }
     return true;
-
 }
 
+// convert numbers to readeable phone number
 function deFormatPhone(number) {
     const numericPhone = number.replace(/\D/g, '');
     return numericPhone;
 }
+
 function isValid(first, last, phone, email, passwrd) {
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // const isPasswordValid = password.length >= 6;
-    // const isEmailValid = emailRegex.test(email);
     const isPhoneValidd = isPhoneValid(phone);
-    console.log('phone', isPhoneValidd);
     if (first === '' || last ==='' || email === '' || passwrd === '' || phone === '') {
-        console.log("here");
         document.getElementById('invalidSignup').textContent = 'Please fill out all fields.';
         return false;
     }
@@ -212,4 +182,4 @@ function isPhoneValid(phone) {
         return false;
     }
 }
-
+// ----------------------------------------------

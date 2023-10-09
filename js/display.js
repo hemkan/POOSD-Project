@@ -424,11 +424,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     name_2.textContent = nameL.textContent;
 });
 
-function getUserName () {
-    const users_firstName = "<?php echo $_SESSION['user']['first_name']; ?>";
-    const capitalizeFirstLetter = users_firstName.charAt(0).toUpperCase() + users_firstName.slice(1);
-    return capitalizeFirstLetter;
-}
 // ---------------------------------------------
 
 // ---------------isValid functions----------------

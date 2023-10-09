@@ -150,7 +150,8 @@ if(!isset($_SESSION['user']))
         <script>
             function getUserName () {
             const users_firstName = "<?php echo $_SESSION['user']['first_name']; ?>";
-            return users_firstName;
+            const capitalizeFirstLetter = users_firstName.charAt(0).toUpperCase() + users_firstName.slice(1);
+            return capitalizeFirstLetter;
         
             }
         </script>

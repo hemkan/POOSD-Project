@@ -186,17 +186,17 @@ saveButton.addEventListener('click', async function (event) {
         updateContact(editedContact, function(result) {
             if (result) {
                 if (result === 2) {
-                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email.';
+                    document.getElementById('invalidMessage').textContent = 'A contact with the same email already exists.';
                     document.getElementById('invalidMessage').style.display = 'block';
                     return;
                     
                 } else if (result === 1) {
-                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another phone number.';
+                    document.getElementById('invalidMessage').textContent = 'A contact with the same phone number already exists.';
                     document.getElementById('invalidMessage').style.display = 'block';
                     return;
 
                 } else if (result === 3) {
-                    document.getElementById('invalidMessage').textContent = 'Duplicate detected. Please enter another email and phone number.';
+                    document.getElementById('invalidMessage').textContent = 'A contact with the entered email and phone number already exists.';
                     document.getElementById('invalidMessage').style.display = 'block';
                     return
                     

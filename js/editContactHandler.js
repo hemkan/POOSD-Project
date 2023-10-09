@@ -27,13 +27,14 @@ function updateContact(newInfo, callback) {
                 if (xhr.status === 409) {
                     // 409 indicates a conflict (duplicate)
                     var errorData = JSON.parse(xhr.responseText);
-                    if (errorData.error === 'Contact exist with same phone number and email.') {
+                    console.log('errorData', errorData);
+                    if (errorData.error === 'A contact with the entered email and phone number already exists.') {
                         console.log('Phone and email duplicate');
                         callback(3); // Call the callback with a conflict code
-                    } else if (errorData.error === 'Contact exist with same phone number.') {
+                    } else if (errorData.error === 'A contact with the same phone number already exists.') {
                         console.log('Phone duplicate');
                         callback(1); // Call the callback with a phone duplicate code
-                    } else if (errorData.error === 'Contact exist with same email.') {
+                    } else if (errorData.error === 'A contact with the same email already exists.') {
                         console.log('Email duplicate');
                         callback(2); // Call the callback with an email duplicate code
                     }

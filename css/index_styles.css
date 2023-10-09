@@ -38,18 +38,19 @@ button {
     text-transform: uppercase;
     letter-spacing: 2.5px;
     border: none;
-    border-radius: 20px;
+    border-radius: 5px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     padding: 1vh 6vh;
     margin: 10px;
-    background-color: rgba(199, 41, 97, 1);
+    background-color: #C7002B;
     color: white;
     transition: transform 0.3s, color 0.3s;
     transform-origin: center;
 }
 button:hover {
     color: white;
+    background-color: #78001A;
     transform: scale(1.01);
 }
 #heading {
@@ -76,24 +77,24 @@ small {
     z-index: 999;
 }
 .btn-primary {
-    background-color: #E46F80;
+    background-color: #db2b69;
     color: #FFFFFF;
     border: none;
 }
 .btn-primary:hover {
-    background-color: #FFFFFF;
-    border: 1px solid #E46F80;
-    color: #E46F80;
+    background-color: transparent;
+    border: 1px solid #db2b69;
+    color: #db2b69;
 }
 .btn-secondary {
-    background-color: #6FA4E1;
+    background-color: #018690;
     color: #FFFFFF;
     border: none;
 }
 .btn-secondary:hover {
-    background-color: #FFFFFF;
-    border: 1px solid #6FA4E1;
-    color: #6FA4E1;
+    background-color: transparent;
+    border: 1px solid #018690;
+    color: #018690;
 }
 /* Responsive CSS for small screens */
 @media (max-width: 450px) {

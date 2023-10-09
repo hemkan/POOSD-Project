@@ -130,6 +130,7 @@
             function getUserName () {
                 const users_firstName = "<?php echo $_SESSION['user']['first_name']; ?>";
                 const capitalizeFirstLetter = users_firstName.charAt(0).toUpperCase() + users_firstName.slice(1);
+                console.log('cap name: ', capitalizeFirstLetter);
                 return capitalizeFirstLetter;
             }
         </script>
